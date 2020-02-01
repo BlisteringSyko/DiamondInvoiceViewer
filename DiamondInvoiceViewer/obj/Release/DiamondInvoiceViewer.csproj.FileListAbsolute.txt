@@ -1,0 +1,14 @@
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvoiceViewer.exe.config
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvoiceViewer.exe
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvoiceViewer.pdb
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\Newtonsoft.Json.dll
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\ObjectListView.dll
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\Newtonsoft.Json.xml
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\ObjectListView.xml
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.csprojAssemblyReference.cache
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.Form1.resources
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.Properties.Resources.resources
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.csproj.GenerateResource.cache
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.csproj.CopyComplete
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.exe
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.pdb

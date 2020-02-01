@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using DiamondInvoiceViewer.Services;
 using Microsoft.VisualBasic.FileIO;
+using Newtonsoft.Json;
 
 namespace DiamondInvoiceViewer
 {
@@ -17,9 +19,52 @@ namespace DiamondInvoiceViewer
 
         public String Title { get; set; }
 
+        readonly string SettingsPath;
+
         public ServiceForm1()
         {
             Title = "Diamond Invoice Parser";
+            SettingsPath = Application.StartupPath + @"/Settings.json";
+        }
+
+        public void LoadSettings(object sender)
+        {
+            if (System.IO.File.Exists(SettingsPath))
+            {
+                String raw = System.IO.File.ReadAllText(SettingsPath);
+                SettingsJson Settings = JsonConvert.DeserializeObject<SettingsJson>(raw);
+
+                if (!(Settings.OlvState is null))
+                {
+                    ((FastObjectListView)((Form)sender).Tag).RestoreState(Settings.OlvState);
+                }
+                if (Settings.LocationX.HasValue && Settings.LocationY.HasValue)
+                {
+                    ((Form)sender).Location = new Point(Settings.LocationX.Value, Settings.LocationY.Value);
+                }
+                if (Settings.Height.HasValue)
+                {
+                    ((Form)sender).Height = Settings.Height.Value;
+                }
+                if (Settings.Width.HasValue)
+                {
+                    ((Form)sender).Width = Settings.Width.Value;
+                }
+            }
+        }
+
+        internal void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SettingsJson Settings = new SettingsJson();
+            Settings.OlvState = ((FastObjectListView)((Form)sender).Tag).SaveState();
+            Settings.LocationX = ((Form)sender).Location.X;
+            Settings.LocationY = ((Form)sender).Location.Y;
+            Settings.Height = ((Form)sender).Height;
+            Settings.Width = ((Form)sender).Width;
+
+            string raw = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+
+            System.IO.File.WriteAllText(SettingsPath, raw);
         }
 
         OLVListItem OlvSelectedItem { get; set; }
@@ -67,7 +112,6 @@ namespace DiamondInvoiceViewer
                 ((FastObjectListView)((Form)sender).Tag).SetObjects(csvRows);
                 ((Form)sender).Text = Title;
             }
-
         }
 
         internal void fastObjectListView1_DragDrop(object sender, DragEventArgs e)
@@ -107,7 +151,7 @@ namespace DiamondInvoiceViewer
 
                     if (invoiceData && fields.Count() == 1 && row == 1)
                     {
-                        Title = $"Diamond Invoice Parser (Invoice: {fields[0]})";
+                        Title = $"Diamond Invoice Parser (Invoice: {fields[0]})"; // <<< The value is set, the binding for form1 is not taking the value.
                     }
                     if (invoiceData) row += 1;
 
@@ -188,6 +232,7 @@ namespace DiamondInvoiceViewer
                                     break;
                                 case 8:
                                     csvRow.OrderType = int.Parse(field);
+                                    if (field == "") csvRow.OrderType = 8;
                                     break;
                                 case 9:
                                     csvRow.ProcessedAsField = field;
@@ -228,81 +273,6 @@ namespace DiamondInvoiceViewer
             }
         }
 
-        public string GetAllocatedString(int value)
-        {
-            switch (value)
-            {
-                case 1:
-                    return "Allocated";
-                case 0:
-                    return "Not Allocated";
-            }
-            return "";
-
-        }
-
-        public string GetOrderTypeString(int value)
-        {
-            switch (value)
-            {
-                case 2:
-                    return "in-stock Reorder received via reship through a Diamond Distribution Center.";
-                case 3:
-                    return "Order Increase";
-                case 4:
-                    return "Advance Reorder filled from extras";
-                case 5:
-                    return "Back Order";
-                case 6:
-                    return "Credit[s]";
-                case 7:
-                    return "in-stock Reorder sent via direct ship from The Reorder Universe (TRU)/Star System";
-                default:
-                    return "Initial Order";
-            }
-        }
-
-        public string GetCatgoryString(int value)
-        {
-            switch (value)
-            {
-                case 1:
-                    return "Comimcs";
-                case 2:
-                    return "Magazines";
-                case 3:
-                    return "Trades";
-                case 4:
-                    return "Novels";
-                case 5:
-                    return "Games";
-                case 6:
-                    return " Cards:";
-                case 7:
-                    return "Novelties - Comics";
-                case 8:
-                    return "Novelties - Non Comics";
-                case 9:
-                    return "Apparel";
-                case 10:
-                    return "Toys & Models";
-                case 11:
-                    return "Suplies - Card";
-                case 12:
-                    return "Supplies - Comic";
-                case 13:
-                    return "Sales Tools";
-                case 14:
-                    return "Diamond Publications";
-                case 15:
-                    return "Posters/Prints/Portfolies/Calendars";
-                case 16:
-                    return "Video/Audio/Video Games";
-            }
-
-            return "";
-        }
-
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
@@ -314,8 +284,6 @@ namespace DiamondInvoiceViewer
                 {
                     csvRows = null;
                 }
-
-
 
                 disposedValue = true;
             }
