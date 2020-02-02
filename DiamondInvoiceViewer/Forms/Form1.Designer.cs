@@ -40,6 +40,9 @@
             this.openItemInPreviewsWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelContent = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.SearchPanel = new System.Windows.Forms.Panel();
+            this.SearchTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelControlBox = new System.Windows.Forms.Panel();
             this.labelWindowTitle = new System.Windows.Forms.Label();
             this.buttonMin = new System.Windows.Forms.Button();
@@ -47,13 +50,18 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBoxWindowicon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panelContent.SuspendLayout();
+            this.SearchPanel.SuspendLayout();
             this.panelControlBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWindowicon)).BeginInit();
@@ -104,13 +112,16 @@
             this.fastObjectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fastObjectListView1.FullRowSelect = true;
             this.fastObjectListView1.HideSelection = false;
-            this.fastObjectListView1.Location = new System.Drawing.Point(0, 25);
+            this.fastObjectListView1.Location = new System.Drawing.Point(0, 55);
             this.fastObjectListView1.Name = "fastObjectListView1";
+            this.fastObjectListView1.ShowCommandMenuOnRightClick = true;
             this.fastObjectListView1.ShowGroups = false;
-            this.fastObjectListView1.Size = new System.Drawing.Size(1132, 425);
+            this.fastObjectListView1.Size = new System.Drawing.Size(1132, 395);
             this.fastObjectListView1.TabIndex = 0;
             this.fastObjectListView1.UseAlternatingBackColors = true;
             this.fastObjectListView1.UseCompatibleStateImageBehavior = false;
+            this.fastObjectListView1.UseFilterIndicator = true;
+            this.fastObjectListView1.UseFiltering = true;
             this.fastObjectListView1.View = System.Windows.Forms.View.Details;
             this.fastObjectListView1.VirtualMode = true;
             // 
@@ -169,7 +180,7 @@
             // olvColumn10
             // 
             this.olvColumn10.AspectName = "ProcessedAsField";
-            this.olvColumn10.Text = "New";
+            this.olvColumn10.Text = "Original";
             // 
             // olvColumn11
             // 
@@ -238,6 +249,7 @@
             // 
             this.panelContent.Controls.Add(this.label1);
             this.panelContent.Controls.Add(this.fastObjectListView1);
+            this.panelContent.Controls.Add(this.SearchPanel);
             this.panelContent.Controls.Add(this.panelControlBox);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.Location = new System.Drawing.Point(0, 0);
@@ -250,12 +262,42 @@
             this.label1.AllowDrop = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("MV Boli", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 25);
+            this.label1.Location = new System.Drawing.Point(0, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1132, 425);
+            this.label1.Size = new System.Drawing.Size(1132, 395);
             this.label1.TabIndex = 1;
             this.label1.Text = "Drag and drop your invoice csv file here";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // SearchPanel
+            // 
+            this.SearchPanel.Controls.Add(this.SearchTextBox);
+            this.SearchPanel.Controls.Add(this.label2);
+            this.SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SearchPanel.Location = new System.Drawing.Point(0, 25);
+            this.SearchPanel.Name = "SearchPanel";
+            this.SearchPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.SearchPanel.Size = new System.Drawing.Size(1132, 30);
+            this.SearchPanel.TabIndex = 2;
+            this.SearchPanel.Visible = false;
+            // 
+            // SearchTextBox
+            // 
+            this.SearchTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SearchTextBox.Location = new System.Drawing.Point(55, 5);
+            this.SearchTextBox.Name = "SearchTextBox";
+            this.SearchTextBox.Size = new System.Drawing.Size(1072, 20);
+            this.SearchTextBox.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label2.Location = new System.Drawing.Point(5, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Search:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panelControlBox
             // 
@@ -275,9 +317,9 @@
             // labelWindowTitle
             // 
             this.labelWindowTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelWindowTitle.Location = new System.Drawing.Point(109, 0);
+            this.labelWindowTitle.Location = new System.Drawing.Point(148, 0);
             this.labelWindowTitle.Name = "labelWindowTitle";
-            this.labelWindowTitle.Size = new System.Drawing.Size(903, 22);
+            this.labelWindowTitle.Size = new System.Drawing.Size(864, 22);
             this.labelWindowTitle.TabIndex = 0;
             this.labelWindowTitle.Text = "label1";
             this.labelWindowTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -317,27 +359,58 @@
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip1.Location = new System.Drawing.Point(22, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(87, 22);
+            this.menuStrip1.Size = new System.Drawing.Size(126, 22);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 19);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 19);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // searchToolStripMenuItem
+            // 
+            this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+            this.searchToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.searchToolStripMenuItem.Text = "Search";
             // 
             // helpToolStripMenuItem
             // 
@@ -377,6 +450,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.panelContent.ResumeLayout(false);
+            this.SearchPanel.ResumeLayout(false);
+            this.SearchPanel.PerformLayout();
             this.panelControlBox.ResumeLayout(false);
             this.panelControlBox.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -422,6 +497,13 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBoxWindowicon;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Panel SearchPanel;
+        private System.Windows.Forms.TextBox SearchTextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
     }
 }
 

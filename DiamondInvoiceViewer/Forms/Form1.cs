@@ -18,9 +18,15 @@ namespace DiamondInvoiceViewer
             InitializeComponent();
             service = new ServiceForm1();
 
-            this.Tag = fastObjectListView1;
-            fastObjectListView1.Tag = this;
-            label1.Tag = this;
+            Tags tag = new Tags(this, label1, fastObjectListView1, SearchPanel, SearchTextBox);
+
+            this.Tag = tag;
+            fastObjectListView1.Tag = tag;
+            label1.Tag = tag;
+            openToolStripMenuItem.Tag = tag;
+            SearchPanel.Tag = tag;
+            SearchTextBox.Tag = tag;
+            searchToolStripMenuItem.Tag = tag;
 
             base.SetStyle(ControlStyles.ResizeRedraw, true);
             base.SetStyle(ControlStyles.UserPaint, true);
@@ -66,6 +72,14 @@ namespace DiamondInvoiceViewer
             this.exitToolStripMenuItem.Click += new System.EventHandler(service.exitToolStripMenuItem_Click);
 
             this.aboutToolStripMenuItem.Click += new System.EventHandler(service.aboutToolStripMenuItem_Click);
+
+            this.openToolStripMenuItem.Click += new System.EventHandler(service.openToolStripMenuItem_Click);
+
+            this.label1.Click += new System.EventHandler(service.label1_Click);
+
+            this.SearchTextBox.TextChanged += new System.EventHandler(service.textBox1_TextChanged);
+
+            this.searchToolStripMenuItem.Click += new System.EventHandler(service.searchToolStripMenuItem_Click);
         }
 
         void RegisterBindings()
@@ -78,9 +92,12 @@ namespace DiamondInvoiceViewer
         {
             olvColumn2.AspectGetter = delegate (object x)
             {
-                CsvRow csvRow = (CsvRow)x;
-                if (!(csvRow.ProcessedAsField is null) && csvRow.ProcessedAsField.Trim() != "") return csvRow.ProcessedAsField;
-                return csvRow.ItemCode;
+                if (!(((CsvRow)x).ProcessedAsField is null) && ((CsvRow)x).ProcessedAsField.Trim() != "")
+                {
+                    return ((CsvRow)x).ProcessedAsField;
+                }
+
+                return ((CsvRow)x).ItemCode;
             };
             olvColumn8.AspectGetter = delegate (object x)
             {
@@ -89,6 +106,15 @@ namespace DiamondInvoiceViewer
             olvColumn9.AspectGetter = delegate (object x)
             {
                 return Enums.GetEnumDescription((OrderType)((CsvRow)x).OrderType);
+            };
+            olvColumn10.AspectGetter = delegate (object x)
+            {
+                if (!(((CsvRow)x).ProcessedAsField is null) && ((CsvRow)x).ProcessedAsField.Trim() != "")
+                {
+                    return ((CsvRow)x).ItemCode;
+                }
+
+                return ((CsvRow)x).ProcessedAsField;
             };
             olvColumn16.AspectGetter = delegate (object x)
             {
@@ -100,6 +126,7 @@ namespace DiamondInvoiceViewer
         {
             formCustomizer.BackColor = ColorTranslator.FromHtml("#FFFFFF");
             formCustomizer.TextColor = ColorTranslator.FromHtml("#000000");
+            formCustomizer.InputTextColor = ColorTranslator.FromHtml("#000000");
             formCustomizer.TitleTextColor = ColorTranslator.FromHtml("#DCDCDC");
             formCustomizer.MenuTextColor = ColorTranslator.FromHtml("#DCDCDC");
             formCustomizer.ControlButtonTextColor = ColorTranslator.FromHtml("#FFFFFF");
@@ -143,5 +170,6 @@ namespace DiamondInvoiceViewer
 
             base.Dispose(disposing);
         }
+
     }
 }

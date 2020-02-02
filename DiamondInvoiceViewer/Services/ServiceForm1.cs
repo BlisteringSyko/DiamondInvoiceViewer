@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using DiamondInvoiceViewer.Services;
 using DiamondInvoiceViewer.Forms;
 using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
+using DiamondInvoiceViewer.Misc_Classes;
 
 namespace DiamondInvoiceViewer
 {
     class ServiceForm1 : IDisposable
     {
-
-        public List<CsvRow> csvRows { get; set; }
-
-        public String Title { get; set; }
+        public string Title { get; set; }
 
         readonly string SettingsPath;
 
@@ -37,7 +34,7 @@ namespace DiamondInvoiceViewer
 
                 if (!(Settings.OlvState is null))
                 {
-                    ((FastObjectListView)((Form)sender).Tag).RestoreState(Settings.OlvState);
+                    ((Tags)((Form)sender).Tag).FastObjectListView.RestoreState(Settings.OlvState);
                 }
                 if (Settings.LocationX.HasValue && Settings.LocationY.HasValue)
                 {
@@ -57,7 +54,7 @@ namespace DiamondInvoiceViewer
         internal void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             SettingsJson Settings = new SettingsJson();
-            Settings.OlvState = ((FastObjectListView)((Form)sender).Tag).SaveState();
+            Settings.OlvState = ((Tags)((Form)sender).Tag).FastObjectListView.SaveState();
             Settings.LocationX = ((Form)sender).Location.X;
             Settings.LocationY = ((Form)sender).Location.Y;
             Settings.Height = ((Form)sender).Height;
@@ -79,7 +76,6 @@ namespace DiamondInvoiceViewer
             {
                 OlvSelectedItem = null;
             }
-
         }
 
         internal void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -109,6 +105,82 @@ namespace DiamondInvoiceViewer
             Application.Exit();
         }
 
+        #region "OpenFile"
+        internal void openToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Comma Separated Value (*.csv)|*.csv";
+            DialogResult dr = ofd.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.SetObjects(ParseCsv(ofd.FileName));
+                ((Tags)((ToolStripMenuItem)sender).Tag).Form.Text = Title;
+                ((Tags)((ToolStripMenuItem)sender).Tag).StatusLabel.Hide();
+                ((Tags)((ToolStripMenuItem)sender).Tag).Form.Refresh();
+            }
+        }
+
+        internal void label1_Click(object sender, System.EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Comma Separated Value (*.csv)|*.csv";
+            DialogResult dr = ofd.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(ParseCsv(ofd.FileName));
+                ((Tags)((Label)sender).Tag).Form.Text = Title;
+                ((Tags)((Label)sender).Tag).StatusLabel.Hide();
+                ((Tags)((Label)sender).Tag).Form.Refresh();
+            }
+        }
+        #endregion
+
+        #region "Filter and Search"
+        internal void textBox1_TextChanged(object sender, System.EventArgs e)
+        {
+            if (((TextBox)sender).Text.Trim() != "")
+            {
+                TextMatchFilter filter = TextMatchFilter.Contains(((Tags)((TextBox)sender).Tag).FastObjectListView, ((TextBox)sender).Text);
+                ((Tags)((TextBox)sender).Tag).FastObjectListView.ModelFilter = filter;
+            }
+            else
+            {
+                ((Tags)((TextBox)sender).Tag).FastObjectListView.ModelFilter = null;
+            }
+        }
+
+        internal void searchToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            if (((Tags)((ToolStripMenuItem)sender).Tag).SearchPanel.Visible)
+            {
+                ((Tags)((ToolStripMenuItem)sender).Tag).SearchPanel.Visible = false;
+                ((Tags)((ToolStripMenuItem)sender).Tag).SearchTextBox.Text = "";
+                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.ModelFilter = null;
+            }
+            else
+            {
+                ((Tags)((ToolStripMenuItem)sender).Tag).SearchPanel.Visible = true;
+                ((Tags)((ToolStripMenuItem)sender).Tag).SearchTextBox.Focus();
+            }
+        }
+        #endregion
+
+        #region "Drag & Drop"
+        internal void fastObjectListView1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            if (!(fileList is null) && System.IO.File.Exists(fileList[0]))
+            {
+                ((FastObjectListView)sender).SetObjects(ParseCsv(fileList[0]));
+                ((Tags)((FastObjectListView)sender).Tag).Form.Text = Title;
+                ((Tags)((FastObjectListView)sender).Tag).Form.Refresh();
+            }
+        }
+        internal void fastObjectListView1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
         internal void label1_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
@@ -118,174 +190,152 @@ namespace DiamondInvoiceViewer
             string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (!(fileList is null) && System.IO.File.Exists(fileList[0]))
             {
-                ParseCsv(fileList[0]);
+                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(ParseCsv(fileList[0]));
+                ((Tags)((Label)sender).Tag).Form.Text = Title;
                 ((Label)sender).Hide();
-                ((FastObjectListView)((Form)((Label)sender).Tag).Tag).SetObjects(csvRows);
-                ((Form)((Label)sender).Tag).Text = Title; // The binding would not take the new value assigned in ParseCsv
-                ((Form)((Label)sender).Tag).Refresh();
+                ((Tags)((Label)sender).Tag).Form.Refresh();
             }
         }
+        #endregion
 
-        internal void fastObjectListView1_DragDrop(object sender, DragEventArgs e)
+        #region "Parse Csv"
+        internal List<CsvRow> ParseCsv(string PathToFile)
         {
-            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            if (!(fileList is null) && System.IO.File.Exists(fileList[0]))
-            {
-                ParseCsv(fileList[0]);
-                ((FastObjectListView)sender).SetObjects(csvRows);
-                ((Form)((FastObjectListView)sender).Tag).Text = Title; // The binding would not take the new value assigned in ParseCsv
-                ((Form)((FastObjectListView)sender).Tag).Refresh();
-            }
-        }
-
-        internal void fastObjectListView1_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
-
-        internal void ParseCsv(string PathToFile)
-        {
+            List<CsvRow> csvRows = new List<CsvRow>();
             using (TextFieldParser parser = new TextFieldParser(PathToFile))
             {
-                csvRows = new List<CsvRow>();
-
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
                 bool invoiceData = false;
                 int row = 0;
                 while (!parser.EndOfData)
                 {
-
                     string[] fields = parser.ReadFields();
-                    int column = 0;
 
                     if (fields[0] == "Invoice on Disk") invoiceData = true;
 
-                    if (invoiceData && fields.Count() == 1 && row == 1)
-                    {
-                        Title = $"Diamond Invoice Parser (Viewer: {fields[0]})"; // <<< The value is set, the binding for form1 is not taking the value.
-                    }
+                    if (invoiceData && fields.Length == 1 && row == 1) Title = $"Diamond Invoice Parser (Viewer: {fields[0]})"; // <<< The value is set, but the binding for form1 is not taking the value.
+
                     if (invoiceData) row += 1;
 
-                    //TODO: Move below code blocks into their own functions.
+                    if (invoiceData && fields.Length == 9) csvRows.Add(ParseNormalInvoice(fields));
 
-                    //Normal Invoice
-                    if (invoiceData && fields.Count() == 9)
-                    {
-                        CsvRow csvRow = new CsvRow();
-                        foreach (string field in fields)
-                        {
-                            switch (column)
-                            {
-                                case 0:
-                                    csvRow.UnitsShipped = int.Parse(field);
-                                    break;
-                                case 1:
-                                    csvRow.ItemCode = field;
-                                    break;
-                                case 2:
-                                    csvRow.ItemDescription = field;
-                                    break;
-                                case 3:
-                                    csvRow.RetailPrice = field;
-                                    break;
-                                case 4:
-                                    csvRow.UnitPrice = field;
-                                    break;
-                                case 5:
-                                    csvRow.InvoiceAmount = field;
-                                    break;
-                                case 6:
-                                    csvRow.CatagoryCode = int.Parse(field);
-                                    break;
-                                case 7:
-                                    csvRow.OrderType = int.Parse(field);
-                                    break;
-                                case 8:
-                                    csvRow.Publisher = field;
-                                    break;
-                            }
-                            column += 1;
-                        }
-                        csvRows.Add(csvRow);
-                    }
-
-
-
-                    //Extended Invoice
-                    if (invoiceData && fields.Count() == 18)
-                    {
-                        CsvRow csvRow = new CsvRow();
-                        foreach (string field in fields)
-                        {
-                            switch (column)
-                            {
-                                case 0:
-                                    csvRow.UnitsShipped = int.Parse(field);
-                                    break;
-                                case 1:
-                                    csvRow.ItemCode = field;
-                                    break;
-                                case 2:
-                                    csvRow.DiscountCode = field;
-                                    break;
-                                case 3:
-                                    csvRow.ItemDescription = field;
-                                    break;
-                                case 4:
-                                    csvRow.RetailPrice = field;
-                                    break;
-                                case 5:
-                                    csvRow.UnitPrice = field;
-                                    break;
-                                case 6:
-                                    csvRow.InvoiceAmount = field;
-                                    break;
-                                case 7:
-                                    csvRow.CatagoryCode = int.Parse(field);
-                                    break;
-                                case 8:
-                                    csvRow.OrderType = int.Parse(field);
-                                    if (field == "") csvRow.OrderType = 8;
-                                    break;
-                                case 9:
-                                    csvRow.ProcessedAsField = field;
-                                    break;
-                                case 10:
-                                    csvRow.OrderNumber = field;
-                                    break;
-                                case 11:
-                                    csvRow.Upc = field;
-                                    break;
-                                case 12:
-                                    csvRow.Isbn = field;
-                                    break;
-                                case 13:
-                                    csvRow.Ean = field;
-                                    break;
-                                case 14:
-                                    csvRow.PoNumber = field;
-                                    break;
-                                case 15:
-                                    csvRow.AllocatedCode = int.Parse(field);
-                                    break;
-                                case 16:
-                                    csvRow.Publisher = field;
-                                    break;
-                                case 17:
-                                    csvRow.SeriesCode = field;
-                                    break;
-                            }
-                            column += 1;
-                        }
-                        csvRows.Add(csvRow);
-                    }
-
+                    if (invoiceData && fields.Length == 18) csvRows.Add(ParseExtendedInvoice(fields));
                 }
-
-
             }
+            return csvRows;
         }
+
+        CsvRow ParseNormalInvoice(string[] fields)
+        {
+            int column = 0;
+            CsvRow csvRow = new CsvRow();
+            foreach (string field in fields)
+            {
+                switch (column)
+                {
+                    case 0:
+                        csvRow.UnitsShipped = int.Parse(field);
+                        break;
+                    case 1:
+                        csvRow.ItemCode = field;
+                        break;
+                    case 2:
+                        csvRow.ItemDescription = field;
+                        break;
+                    case 3:
+                        csvRow.RetailPrice = field;
+                        break;
+                    case 4:
+                        csvRow.UnitPrice = field;
+                        break;
+                    case 5:
+                        csvRow.InvoiceAmount = field;
+                        break;
+                    case 6:
+                        csvRow.CatagoryCode = int.Parse(field);
+                        break;
+                    case 7:
+                        csvRow.OrderType = int.Parse(field);
+                        break;
+                    case 8:
+                        csvRow.Publisher = field;
+                        break;
+                }
+                column += 1;
+            }
+            return csvRow;
+        }
+
+        CsvRow ParseExtendedInvoice(string[] fields)
+        {
+            int column = 0;
+            CsvRow csvRow = new CsvRow();
+            foreach (string field in fields)
+            {
+                switch (column)
+                {
+                    case 0:
+                        csvRow.UnitsShipped = int.Parse(field);
+                        break;
+                    case 1:
+                        csvRow.ItemCode = field;
+                        break;
+                    case 2:
+                        csvRow.DiscountCode = field;
+                        break;
+                    case 3:
+                        csvRow.ItemDescription = field;
+                        break;
+                    case 4:
+                        csvRow.RetailPrice = field;
+                        break;
+                    case 5:
+                        csvRow.UnitPrice = field;
+                        break;
+                    case 6:
+                        csvRow.InvoiceAmount = field;
+                        break;
+                    case 7:
+                        csvRow.CatagoryCode = int.Parse(field);
+                        break;
+                    case 8:
+                        csvRow.OrderType = int.Parse(field);
+                        if (field == "") csvRow.OrderType = 8;
+                        break;
+                    case 9:
+                        csvRow.ProcessedAsField = field;
+                        break;
+                    case 10:
+                        csvRow.OrderNumber = field;
+                        break;
+                    case 11:
+                        csvRow.Upc = field;
+                        break;
+                    case 12:
+                        csvRow.Isbn = field;
+                        break;
+                    case 13:
+                        csvRow.Ean = field;
+                        break;
+                    case 14:
+                        csvRow.PoNumber = field;
+                        break;
+                    case 15:
+                        csvRow.AllocatedCode = int.Parse(field);
+                        break;
+                    case 16:
+                        csvRow.Publisher = field;
+                        break;
+                    case 17:
+                        csvRow.SeriesCode = field;
+                        break;
+                }
+                column += 1;
+            }
+            return csvRow;
+        }
+        #endregion
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
@@ -294,11 +344,6 @@ namespace DiamondInvoiceViewer
         {
             if (!disposedValue)
             {
-                if (disposing)
-                {
-                    csvRows = null;
-                }
-
                 disposedValue = true;
             }
         }
