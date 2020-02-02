@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DiamondInvoiceViewer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Diamond Invoice Viewer")]
+[assembly: AssemblyDescription("Parses your Csv invoice into something easier to read and allows opening the items on Previewsworld for viewing.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DiamondInvoiceViewer")]
+[assembly: AssemblyCompany("Chris Baker")]
+[assembly: AssemblyProduct("Diamond Invoice Viewer")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

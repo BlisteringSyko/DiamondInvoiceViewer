@@ -1,12 +1,17 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
+using BrightIdeasSoftware;
 using DiamondInvoiceViewer.Misc_Classes;
 using DiamondInvoiceViewer.Services;
+using formCustomizer;
 
 namespace DiamondInvoiceViewer
 {
     public partial class Form1 : Form
     {
         ServiceForm1 service;
+
+        FormCustomizer formCustomizer;
 
         public Form1()
         {
@@ -15,6 +20,16 @@ namespace DiamondInvoiceViewer
 
             this.Tag = fastObjectListView1;
             fastObjectListView1.Tag = this;
+            label1.Tag = this;
+
+            base.SetStyle(ControlStyles.ResizeRedraw, true);
+            base.SetStyle(ControlStyles.UserPaint, true);
+            base.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            base.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.Sizable;
+
+            if (formCustomizer is null) formCustomizer = new FormCustomizer(base.Handle, this);
 
             service.LoadSettings(this);
 
@@ -23,6 +38,14 @@ namespace DiamondInvoiceViewer
             SetOlvAspectGetters();
 
             RegisterBindings();
+
+            SetFormCustomizerInitialColors();
+
+            UpdateFormCustomizer();
+
+            formCustomizer._exclusions.Add(label1);
+
+            formCustomizer.updateControlStyles(this);
         }
 
         void RegisterEvents()
@@ -33,17 +56,22 @@ namespace DiamondInvoiceViewer
 
             this.openItemInPreviewsWorldToolStripMenuItem.Click += new System.EventHandler(service.openItemInPreviewsWorldToolStripMenuItem_Click);
 
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(service.Form1_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(service.Form1_DragEnter);
+            this.label1.DragDrop += new System.Windows.Forms.DragEventHandler(service.label1_DragDrop);
+            this.label1.DragEnter += new System.Windows.Forms.DragEventHandler(service.label1_DragEnter);
 
             this.fastObjectListView1.DragDrop += new System.Windows.Forms.DragEventHandler(service.fastObjectListView1_DragDrop);
             this.fastObjectListView1.DragEnter += new System.Windows.Forms.DragEventHandler(service.fastObjectListView1_DragEnter);
             this.fastObjectListView1.CellRightClick += new System.EventHandler<BrightIdeasSoftware.CellRightClickEventArgs>(service.fastObjectListView1_CellRightClick);
+
+            this.exitToolStripMenuItem.Click += new System.EventHandler(service.exitToolStripMenuItem_Click);
+
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(service.aboutToolStripMenuItem_Click);
         }
 
         void RegisterBindings()
         {
             this.DataBindings.Add(new Binding("Text", service, "Title", false, DataSourceUpdateMode.OnPropertyChanged));
+            labelWindowTitle.DataBindings.Add(new Binding("Text", service, "Title", false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         void SetOlvAspectGetters()
@@ -68,6 +96,46 @@ namespace DiamondInvoiceViewer
             };
         }
 
+        void SetFormCustomizerInitialColors()
+        {
+            formCustomizer.BackColor = ColorTranslator.FromHtml("#FFFFFF");
+            formCustomizer.TextColor = ColorTranslator.FromHtml("#000000");
+            formCustomizer.TitleTextColor = ColorTranslator.FromHtml("#DCDCDC");
+            formCustomizer.MenuTextColor = ColorTranslator.FromHtml("#DCDCDC");
+            formCustomizer.ControlButtonTextColor = ColorTranslator.FromHtml("#FFFFFF");
+            formCustomizer.BorderColor = ColorTranslator.FromHtml("#0A4F94");
+            formCustomizer.ShadowColor = ColorTranslator.FromHtml("#D0D3D4");
+            formCustomizer.TextStatusStripColor = Color.White;
+            formCustomizer.TitleBarColor = ColorTranslator.FromHtml("#2A6FB4");
+        }
+
+        void UpdateFormCustomizer()
+        {
+            formCustomizer.setTitleBar(panelControlBox);
+            formCustomizer.setTitleLabel(labelWindowTitle);
+            formCustomizer.setMenuStrip(menuStrip1);
+            formCustomizer.setIcon(pictureBoxWindowicon);
+            formCustomizer.setCloseButton(buttonClose);
+            formCustomizer.setMaxiButton(buttonMax);
+            formCustomizer.setMiniButton(buttonMin);
+
+            panelContent.BackColor = formCustomizer.BackColor;
+            label1.ForeColor = formCustomizer.TitleBarColor;
+
+            fastObjectListView1.BackColor = formCustomizer.BackColor;
+            fastObjectListView1.ForeColor = formCustomizer.TextColor;
+            fastObjectListView1.AlternateRowBackColor = formCustomizer.ShadowColor;
+
+            fastObjectListView1.SelectedBackColor = formCustomizer.TitleBarColor;
+            fastObjectListView1.SelectedForeColor = formCustomizer.TitleTextColor;
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (formCustomizer is null) formCustomizer = new FormCustomizer(base.Handle, this);
+            if (formCustomizer.pWndProc(ref m)) base.WndProc(ref m);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (service != null)) service.Dispose();
@@ -75,6 +143,5 @@ namespace DiamondInvoiceViewer
 
             base.Dispose(disposing);
         }
-
     }
 }

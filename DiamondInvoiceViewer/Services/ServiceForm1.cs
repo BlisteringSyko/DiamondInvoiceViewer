@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using DiamondInvoiceViewer.Services;
+using DiamondInvoiceViewer.Forms;
 using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
 
@@ -23,7 +24,7 @@ namespace DiamondInvoiceViewer
 
         public ServiceForm1()
         {
-            Title = "Diamond Invoice Parser";
+            Title = "Diamond Invoice Viewer";
             SettingsPath = Application.StartupPath + @"/Settings.json";
         }
 
@@ -97,20 +98,31 @@ namespace DiamondInvoiceViewer
                 Process.Start($"https://www.previewsworld.com/Catalog/{row.ItemCode}");
             }
         }
-
-        internal void Form1_DragEnter(object sender, DragEventArgs e)
+        internal void aboutToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            AboutBox1 ab = new AboutBox1();
+            ab.ShowDialog();
         }
 
-        internal void Form1_DragDrop(object sender, DragEventArgs e)
+        internal void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        internal void label1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+        internal void label1_DragDrop(object sender, DragEventArgs e)
         {
             string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (!(fileList is null) && System.IO.File.Exists(fileList[0]))
             {
                 ParseCsv(fileList[0]);
-                ((FastObjectListView)((Form)sender).Tag).SetObjects(csvRows);
-                ((Form)sender).Text = Title;
+                ((Label)sender).Hide();
+                ((FastObjectListView)((Form)((Label)sender).Tag).Tag).SetObjects(csvRows);
+                ((Form)((Label)sender).Tag).Text = Title; // The binding would not take the new value assigned in ParseCsv
+                ((Form)((Label)sender).Tag).Refresh();
             }
         }
 
@@ -122,6 +134,7 @@ namespace DiamondInvoiceViewer
                 ParseCsv(fileList[0]);
                 ((FastObjectListView)sender).SetObjects(csvRows);
                 ((Form)((FastObjectListView)sender).Tag).Text = Title; // The binding would not take the new value assigned in ParseCsv
+                ((Form)((FastObjectListView)sender).Tag).Refresh();
             }
         }
 
@@ -129,7 +142,6 @@ namespace DiamondInvoiceViewer
         {
             e.Effect = DragDropEffects.Copy;
         }
-
 
         internal void ParseCsv(string PathToFile)
         {
@@ -151,9 +163,11 @@ namespace DiamondInvoiceViewer
 
                     if (invoiceData && fields.Count() == 1 && row == 1)
                     {
-                        Title = $"Diamond Invoice Parser (Invoice: {fields[0]})"; // <<< The value is set, the binding for form1 is not taking the value.
+                        Title = $"Diamond Invoice Parser (Viewer: {fields[0]})"; // <<< The value is set, the binding for form1 is not taking the value.
                     }
                     if (invoiceData) row += 1;
+
+                    //TODO: Move below code blocks into their own functions.
 
                     //Normal Invoice
                     if (invoiceData && fields.Count() == 9)

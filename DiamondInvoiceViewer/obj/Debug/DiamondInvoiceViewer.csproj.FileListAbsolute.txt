@@ -11,3 +11,7 @@ C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Debug\DiamondInvoic
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Debug\DiamondInvoiceViewer.csproj.CopyComplete
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Debug\DiamondInvoiceViewer.exe
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Debug\DiamondInvoiceViewer.pdb
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Debug\DiamondInvoiceViewer.csprojAssemblyReference.cache
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Debug\FormCustomizer.dll
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Debug\FormCustomizer.pdb
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Debug\DiamondInvoiceViewer.Forms.AboutBox1.resources
