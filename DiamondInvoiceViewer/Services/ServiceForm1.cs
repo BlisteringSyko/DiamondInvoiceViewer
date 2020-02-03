@@ -94,6 +94,11 @@ namespace DiamondInvoiceViewer
                 Process.Start($"https://www.previewsworld.com/Catalog/{row.ItemCode}");
             }
         }
+        internal void clearToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.SetObjects(null);
+            ((Tags)((ToolStripMenuItem)sender).Tag).StatusLabel.Visible = true;
+        }
         internal void aboutToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             AboutBox1 ab = new AboutBox1();

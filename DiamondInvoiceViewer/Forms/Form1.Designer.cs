@@ -18,31 +18,31 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn7 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn8 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn9 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn10 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn11 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn12 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn13 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn14 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn15 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn16 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn17 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumn18 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColUnitsShipped = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColItemCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColDiscount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColItemDesc = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColRetailPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColUnitPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColInvoiceAmount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColCatagory = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColOrderType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColPAF = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColOrderNum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColUpc = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColIsbn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColEan = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColPO = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColAllocated = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColPublisher = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColSeriesCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openItemInPreviewsWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblSearch = new System.Windows.Forms.Label();
             this.panelControlBox = new System.Windows.Forms.Panel();
             this.labelWindowTitle = new System.Windows.Forms.Label();
             this.buttonMin = new System.Windows.Forms.Button();
@@ -57,56 +57,58 @@
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBoxWindowicon = new System.Windows.Forms.PictureBox();
+            this.pbWindowicon = new System.Windows.Forms.PictureBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panelContent.SuspendLayout();
             this.SearchPanel.SuspendLayout();
             this.panelControlBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWindowicon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWindowicon)).BeginInit();
             this.SuspendLayout();
             // 
             // fastObjectListView1
             // 
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn1);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn2);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn3);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn4);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn5);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn6);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn7);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn8);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn9);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn10);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn11);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn12);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn13);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn14);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn15);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn16);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn17);
-            this.fastObjectListView1.AllColumns.Add(this.olvColumn18);
+            this.fastObjectListView1.AllColumns.Add(this.olvColUnitsShipped);
+            this.fastObjectListView1.AllColumns.Add(this.olvColItemCode);
+            this.fastObjectListView1.AllColumns.Add(this.olvColDiscount);
+            this.fastObjectListView1.AllColumns.Add(this.olvColItemDesc);
+            this.fastObjectListView1.AllColumns.Add(this.olvColRetailPrice);
+            this.fastObjectListView1.AllColumns.Add(this.olvColUnitPrice);
+            this.fastObjectListView1.AllColumns.Add(this.olvColInvoiceAmount);
+            this.fastObjectListView1.AllColumns.Add(this.olvColCatagory);
+            this.fastObjectListView1.AllColumns.Add(this.olvColOrderType);
+            this.fastObjectListView1.AllColumns.Add(this.olvColPAF);
+            this.fastObjectListView1.AllColumns.Add(this.olvColOrderNum);
+            this.fastObjectListView1.AllColumns.Add(this.olvColUpc);
+            this.fastObjectListView1.AllColumns.Add(this.olvColIsbn);
+            this.fastObjectListView1.AllColumns.Add(this.olvColEan);
+            this.fastObjectListView1.AllColumns.Add(this.olvColPO);
+            this.fastObjectListView1.AllColumns.Add(this.olvColAllocated);
+            this.fastObjectListView1.AllColumns.Add(this.olvColPublisher);
+            this.fastObjectListView1.AllColumns.Add(this.olvColSeriesCode);
             this.fastObjectListView1.AllowDrop = true;
             this.fastObjectListView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.fastObjectListView1.CellEditUseWholeCell = false;
             this.fastObjectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1,
-            this.olvColumn2,
-            this.olvColumn3,
-            this.olvColumn4,
-            this.olvColumn5,
-            this.olvColumn6,
-            this.olvColumn7,
-            this.olvColumn8,
-            this.olvColumn9,
-            this.olvColumn10,
-            this.olvColumn11,
-            this.olvColumn12,
-            this.olvColumn15,
-            this.olvColumn16,
-            this.olvColumn17,
-            this.olvColumn18});
+            this.olvColUnitsShipped,
+            this.olvColItemCode,
+            this.olvColDiscount,
+            this.olvColItemDesc,
+            this.olvColRetailPrice,
+            this.olvColUnitPrice,
+            this.olvColInvoiceAmount,
+            this.olvColCatagory,
+            this.olvColOrderType,
+            this.olvColPAF,
+            this.olvColOrderNum,
+            this.olvColUpc,
+            this.olvColPO,
+            this.olvColAllocated,
+            this.olvColPublisher,
+            this.olvColSeriesCode});
             this.fastObjectListView1.ContextMenuStrip = this.contextMenuStrip1;
             this.fastObjectListView1.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastObjectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -125,112 +127,112 @@
             this.fastObjectListView1.View = System.Windows.Forms.View.Details;
             this.fastObjectListView1.VirtualMode = true;
             // 
-            // olvColumn1
+            // olvColUnitsShipped
             // 
-            this.olvColumn1.AspectName = "UnitsShipped";
-            this.olvColumn1.Text = "Qty";
-            this.olvColumn1.Width = 35;
+            this.olvColUnitsShipped.AspectName = "UnitsShipped";
+            this.olvColUnitsShipped.Text = "Qty";
+            this.olvColUnitsShipped.Width = 35;
             // 
-            // olvColumn2
+            // olvColItemCode
             // 
-            this.olvColumn2.AspectName = "ItemCode";
-            this.olvColumn2.Text = "Item";
-            this.olvColumn2.Width = 85;
+            this.olvColItemCode.AspectName = "ItemCode";
+            this.olvColItemCode.Text = "Item";
+            this.olvColItemCode.Width = 85;
             // 
-            // olvColumn3
+            // olvColDiscount
             // 
-            this.olvColumn3.AspectName = "DiscountCode";
-            this.olvColumn3.Text = "Discount";
-            this.olvColumn3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColDiscount.AspectName = "DiscountCode";
+            this.olvColDiscount.Text = "Discount";
+            this.olvColDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // olvColumn4
+            // olvColItemDesc
             // 
-            this.olvColumn4.AspectName = "ItemDescription";
-            this.olvColumn4.FillsFreeSpace = true;
-            this.olvColumn4.Text = "Title";
+            this.olvColItemDesc.AspectName = "ItemDescription";
+            this.olvColItemDesc.FillsFreeSpace = true;
+            this.olvColItemDesc.Text = "Title";
             // 
-            // olvColumn5
+            // olvColRetailPrice
             // 
-            this.olvColumn5.AspectName = "RetailPrice";
-            this.olvColumn5.Text = "Retail";
-            this.olvColumn5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvColRetailPrice.AspectName = "RetailPrice";
+            this.olvColRetailPrice.Text = "Retail";
+            this.olvColRetailPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // olvColumn6
+            // olvColUnitPrice
             // 
-            this.olvColumn6.AspectName = "UnitPrice";
-            this.olvColumn6.Text = "Cost";
-            this.olvColumn6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvColUnitPrice.AspectName = "UnitPrice";
+            this.olvColUnitPrice.Text = "Cost";
+            this.olvColUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // olvColumn7
+            // olvColInvoiceAmount
             // 
-            this.olvColumn7.AspectName = "InvoiceAmount";
-            this.olvColumn7.Text = "Invoice";
-            this.olvColumn7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvColInvoiceAmount.AspectName = "InvoiceAmount";
+            this.olvColInvoiceAmount.Text = "Invoice";
+            this.olvColInvoiceAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // olvColumn8
+            // olvColCatagory
             // 
-            this.olvColumn8.AspectName = "CatagoryCode";
-            this.olvColumn8.Text = "Catagory";
+            this.olvColCatagory.AspectName = "CatagoryCode";
+            this.olvColCatagory.Text = "Catagory";
             // 
-            // olvColumn9
+            // olvColOrderType
             // 
-            this.olvColumn9.AspectName = "OrderType";
-            this.olvColumn9.Text = "Type";
+            this.olvColOrderType.AspectName = "OrderType";
+            this.olvColOrderType.Text = "Type";
             // 
-            // olvColumn10
+            // olvColPAF
             // 
-            this.olvColumn10.AspectName = "ProcessedAsField";
-            this.olvColumn10.Text = "Original";
+            this.olvColPAF.AspectName = "ProcessedAsField";
+            this.olvColPAF.Text = "Original";
             // 
-            // olvColumn11
+            // olvColOrderNum
             // 
-            this.olvColumn11.AspectName = "OrderNumber";
-            this.olvColumn11.Text = "Order#";
-            this.olvColumn11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvColOrderNum.AspectName = "OrderNumber";
+            this.olvColOrderNum.Text = "Order#";
+            this.olvColOrderNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // olvColumn12
+            // olvColUpc
             // 
-            this.olvColumn12.AspectName = "Upc";
-            this.olvColumn12.Text = "Upc";
-            this.olvColumn12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvColumn12.Width = 100;
+            this.olvColUpc.AspectName = "Upc";
+            this.olvColUpc.Text = "Upc";
+            this.olvColUpc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvColUpc.Width = 100;
             // 
-            // olvColumn13
+            // olvColIsbn
             // 
-            this.olvColumn13.AspectName = "Isbn";
-            this.olvColumn13.DisplayIndex = 12;
-            this.olvColumn13.IsVisible = false;
-            this.olvColumn13.Text = "Isbn";
-            this.olvColumn13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvColIsbn.AspectName = "Isbn";
+            this.olvColIsbn.DisplayIndex = 12;
+            this.olvColIsbn.IsVisible = false;
+            this.olvColIsbn.Text = "Isbn";
+            this.olvColIsbn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // olvColumn14
+            // olvColEan
             // 
-            this.olvColumn14.AspectName = "Ean";
-            this.olvColumn14.DisplayIndex = 13;
-            this.olvColumn14.IsVisible = false;
-            this.olvColumn14.Text = "Ean";
-            this.olvColumn14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvColEan.AspectName = "Ean";
+            this.olvColEan.DisplayIndex = 13;
+            this.olvColEan.IsVisible = false;
+            this.olvColEan.Text = "Ean";
+            this.olvColEan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // olvColumn15
+            // olvColPO
             // 
-            this.olvColumn15.AspectName = "PoNumber";
-            this.olvColumn15.Text = "PO";
-            this.olvColumn15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvColPO.AspectName = "PoNumber";
+            this.olvColPO.Text = "PO";
+            this.olvColPO.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // olvColumn16
+            // olvColAllocated
             // 
-            this.olvColumn16.AspectName = "AllocatedCode";
-            this.olvColumn16.Text = "Allocated";
+            this.olvColAllocated.AspectName = "AllocatedCode";
+            this.olvColAllocated.Text = "Allocated";
             // 
-            // olvColumn17
+            // olvColPublisher
             // 
-            this.olvColumn17.AspectName = "Publisher";
-            this.olvColumn17.Text = "Publisher";
+            this.olvColPublisher.AspectName = "Publisher";
+            this.olvColPublisher.Text = "Publisher";
             // 
-            // olvColumn18
+            // olvColSeriesCode
             // 
-            this.olvColumn18.AspectName = "SeriesCode";
-            this.olvColumn18.Text = "Series";
+            this.olvColSeriesCode.AspectName = "SeriesCode";
+            this.olvColSeriesCode.Text = "Series";
             // 
             // contextMenuStrip1
             // 
@@ -247,7 +249,7 @@
             // 
             // panelContent
             // 
-            this.panelContent.Controls.Add(this.label1);
+            this.panelContent.Controls.Add(this.lblStatus);
             this.panelContent.Controls.Add(this.fastObjectListView1);
             this.panelContent.Controls.Add(this.SearchPanel);
             this.panelContent.Controls.Add(this.panelControlBox);
@@ -257,22 +259,22 @@
             this.panelContent.Size = new System.Drawing.Size(1132, 450);
             this.panelContent.TabIndex = 1;
             // 
-            // label1
+            // lblStatus
             // 
-            this.label1.AllowDrop = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("MV Boli", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 55);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1132, 395);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Drag and drop your invoice csv file here";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblStatus.AllowDrop = true;
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblStatus.Font = new System.Drawing.Font("MV Boli", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(0, 55);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(1132, 395);
+            this.lblStatus.TabIndex = 1;
+            this.lblStatus.Text = "Drag and drop your invoice csv file here";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // SearchPanel
             // 
             this.SearchPanel.Controls.Add(this.SearchTextBox);
-            this.SearchPanel.Controls.Add(this.label2);
+            this.SearchPanel.Controls.Add(this.lblSearch);
             this.SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.SearchPanel.Location = new System.Drawing.Point(0, 25);
             this.SearchPanel.Name = "SearchPanel";
@@ -289,15 +291,15 @@
             this.SearchTextBox.Size = new System.Drawing.Size(1072, 20);
             this.SearchTextBox.TabIndex = 1;
             // 
-            // label2
+            // lblSearch
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label2.Location = new System.Drawing.Point(5, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Search:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSearch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblSearch.Location = new System.Drawing.Point(5, 5);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(50, 20);
+            this.lblSearch.TabIndex = 0;
+            this.lblSearch.Text = "Search:";
+            this.lblSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panelControlBox
             // 
@@ -306,7 +308,7 @@
             this.panelControlBox.Controls.Add(this.buttonMax);
             this.panelControlBox.Controls.Add(this.buttonClose);
             this.panelControlBox.Controls.Add(this.menuStrip1);
-            this.panelControlBox.Controls.Add(this.pictureBoxWindowicon);
+            this.panelControlBox.Controls.Add(this.pbWindowicon);
             this.panelControlBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControlBox.Location = new System.Drawing.Point(0, 0);
             this.panelControlBox.Name = "panelControlBox";
@@ -317,9 +319,9 @@
             // labelWindowTitle
             // 
             this.labelWindowTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelWindowTitle.Location = new System.Drawing.Point(148, 0);
+            this.labelWindowTitle.Location = new System.Drawing.Point(268, 0);
             this.labelWindowTitle.Name = "labelWindowTitle";
-            this.labelWindowTitle.Size = new System.Drawing.Size(864, 22);
+            this.labelWindowTitle.Size = new System.Drawing.Size(744, 22);
             this.labelWindowTitle.TabIndex = 0;
             this.labelWindowTitle.Text = "label1";
             this.labelWindowTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -364,7 +366,7 @@
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip1.Location = new System.Drawing.Point(22, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(126, 22);
+            this.menuStrip1.Size = new System.Drawing.Size(246, 22);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -373,6 +375,8 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.toolStripSeparator1,
+            this.clearToolStripMenuItem,
+            this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 19);
@@ -382,19 +386,19 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -426,16 +430,27 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // pictureBoxWindowicon
+            // pbWindowicon
             // 
-            this.pictureBoxWindowicon.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBoxWindowicon.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxWindowicon.Name = "pictureBoxWindowicon";
-            this.pictureBoxWindowicon.Padding = new System.Windows.Forms.Padding(0, 0, 2, 5);
-            this.pictureBoxWindowicon.Size = new System.Drawing.Size(22, 22);
-            this.pictureBoxWindowicon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxWindowicon.TabIndex = 5;
-            this.pictureBoxWindowicon.TabStop = false;
+            this.pbWindowicon.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pbWindowicon.Location = new System.Drawing.Point(0, 0);
+            this.pbWindowicon.Name = "pbWindowicon";
+            this.pbWindowicon.Padding = new System.Windows.Forms.Padding(0, 0, 2, 5);
+            this.pbWindowicon.Size = new System.Drawing.Size(22, 22);
+            this.pbWindowicon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbWindowicon.TabIndex = 5;
+            this.pbWindowicon.TabStop = false;
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearToolStripMenuItem.Text = "Clear";
             // 
             // Form1
             // 
@@ -456,7 +471,7 @@
             this.panelControlBox.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWindowicon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWindowicon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -464,24 +479,24 @@
         #endregion
 
         private BrightIdeasSoftware.FastObjectListView fastObjectListView1;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvColumn2;
-        private BrightIdeasSoftware.OLVColumn olvColumn3;
-        private BrightIdeasSoftware.OLVColumn olvColumn4;
-        private BrightIdeasSoftware.OLVColumn olvColumn5;
-        private BrightIdeasSoftware.OLVColumn olvColumn6;
-        private BrightIdeasSoftware.OLVColumn olvColumn7;
-        private BrightIdeasSoftware.OLVColumn olvColumn8;
-        private BrightIdeasSoftware.OLVColumn olvColumn9;
-        private BrightIdeasSoftware.OLVColumn olvColumn10;
-        private BrightIdeasSoftware.OLVColumn olvColumn11;
-        private BrightIdeasSoftware.OLVColumn olvColumn12;
-        private BrightIdeasSoftware.OLVColumn olvColumn13;
-        private BrightIdeasSoftware.OLVColumn olvColumn14;
-        private BrightIdeasSoftware.OLVColumn olvColumn15;
-        private BrightIdeasSoftware.OLVColumn olvColumn16;
-        private BrightIdeasSoftware.OLVColumn olvColumn17;
-        private BrightIdeasSoftware.OLVColumn olvColumn18;
+        private BrightIdeasSoftware.OLVColumn olvColUnitsShipped;
+        private BrightIdeasSoftware.OLVColumn olvColItemCode;
+        private BrightIdeasSoftware.OLVColumn olvColDiscount;
+        private BrightIdeasSoftware.OLVColumn olvColItemDesc;
+        private BrightIdeasSoftware.OLVColumn olvColRetailPrice;
+        private BrightIdeasSoftware.OLVColumn olvColUnitPrice;
+        private BrightIdeasSoftware.OLVColumn olvColInvoiceAmount;
+        private BrightIdeasSoftware.OLVColumn olvColCatagory;
+        private BrightIdeasSoftware.OLVColumn olvColOrderType;
+        private BrightIdeasSoftware.OLVColumn olvColPAF;
+        private BrightIdeasSoftware.OLVColumn olvColOrderNum;
+        private BrightIdeasSoftware.OLVColumn olvColUpc;
+        private BrightIdeasSoftware.OLVColumn olvColIsbn;
+        private BrightIdeasSoftware.OLVColumn olvColEan;
+        private BrightIdeasSoftware.OLVColumn olvColPO;
+        private BrightIdeasSoftware.OLVColumn olvColAllocated;
+        private BrightIdeasSoftware.OLVColumn olvColPublisher;
+        private BrightIdeasSoftware.OLVColumn olvColSeriesCode;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem openItemInPreviewsWorldToolStripMenuItem;
         private System.Windows.Forms.Panel panelContent;
@@ -495,15 +510,17 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBoxWindowicon;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.PictureBox pbWindowicon;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel SearchPanel;
         private System.Windows.Forms.TextBox SearchTextBox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

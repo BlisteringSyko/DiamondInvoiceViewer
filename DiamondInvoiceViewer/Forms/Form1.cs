@@ -18,15 +18,16 @@ namespace DiamondInvoiceViewer
             InitializeComponent();
             service = new ServiceForm1();
 
-            Tags tag = new Tags(this, label1, fastObjectListView1, SearchPanel, SearchTextBox);
+            Tags tag = new Tags(this, lblStatus, fastObjectListView1, SearchPanel, SearchTextBox);
 
             this.Tag = tag;
             fastObjectListView1.Tag = tag;
-            label1.Tag = tag;
+            lblStatus.Tag = tag;
             openToolStripMenuItem.Tag = tag;
             SearchPanel.Tag = tag;
             SearchTextBox.Tag = tag;
             searchToolStripMenuItem.Tag = tag;
+            clearToolStripMenuItem.Tag = tag;
 
             base.SetStyle(ControlStyles.ResizeRedraw, true);
             base.SetStyle(ControlStyles.UserPaint, true);
@@ -49,7 +50,7 @@ namespace DiamondInvoiceViewer
 
             UpdateFormCustomizer();
 
-            formCustomizer._exclusions.Add(label1);
+            formCustomizer._exclusions.Add(lblStatus);
 
             formCustomizer.updateControlStyles(this);
         }
@@ -62,8 +63,8 @@ namespace DiamondInvoiceViewer
 
             this.openItemInPreviewsWorldToolStripMenuItem.Click += new System.EventHandler(service.openItemInPreviewsWorldToolStripMenuItem_Click);
 
-            this.label1.DragDrop += new System.Windows.Forms.DragEventHandler(service.label1_DragDrop);
-            this.label1.DragEnter += new System.Windows.Forms.DragEventHandler(service.label1_DragEnter);
+            this.lblStatus.DragDrop += new System.Windows.Forms.DragEventHandler(service.label1_DragDrop);
+            this.lblStatus.DragEnter += new System.Windows.Forms.DragEventHandler(service.label1_DragEnter);
 
             this.fastObjectListView1.DragDrop += new System.Windows.Forms.DragEventHandler(service.fastObjectListView1_DragDrop);
             this.fastObjectListView1.DragEnter += new System.Windows.Forms.DragEventHandler(service.fastObjectListView1_DragEnter);
@@ -75,11 +76,13 @@ namespace DiamondInvoiceViewer
 
             this.openToolStripMenuItem.Click += new System.EventHandler(service.openToolStripMenuItem_Click);
 
-            this.label1.Click += new System.EventHandler(service.label1_Click);
+            this.lblStatus.Click += new System.EventHandler(service.label1_Click);
 
             this.SearchTextBox.TextChanged += new System.EventHandler(service.textBox1_TextChanged);
 
             this.searchToolStripMenuItem.Click += new System.EventHandler(service.searchToolStripMenuItem_Click);
+
+            this.clearToolStripMenuItem.Click += new System.EventHandler(service.clearToolStripMenuItem_Click);
         }
 
         void RegisterBindings()
@@ -90,7 +93,7 @@ namespace DiamondInvoiceViewer
 
         void SetOlvAspectGetters()
         {
-            olvColumn2.AspectGetter = delegate (object x)
+            olvColItemCode.AspectGetter = delegate (object x)
             {
                 if (!(((CsvRow)x).ProcessedAsField is null) && ((CsvRow)x).ProcessedAsField.Trim() != "")
                 {
@@ -99,15 +102,15 @@ namespace DiamondInvoiceViewer
 
                 return ((CsvRow)x).ItemCode;
             };
-            olvColumn8.AspectGetter = delegate (object x)
+            olvColCatagory.AspectGetter = delegate (object x)
             {
                 return Enums.GetEnumDescription((Catagory)((CsvRow)x).CatagoryCode);
             };
-            olvColumn9.AspectGetter = delegate (object x)
+            olvColOrderType.AspectGetter = delegate (object x)
             {
                 return Enums.GetEnumDescription((OrderType)((CsvRow)x).OrderType);
             };
-            olvColumn10.AspectGetter = delegate (object x)
+            olvColPAF.AspectGetter = delegate (object x)
             {
                 if (!(((CsvRow)x).ProcessedAsField is null) && ((CsvRow)x).ProcessedAsField.Trim() != "")
                 {
@@ -116,7 +119,7 @@ namespace DiamondInvoiceViewer
 
                 return ((CsvRow)x).ProcessedAsField;
             };
-            olvColumn16.AspectGetter = delegate (object x)
+            olvColAllocated.AspectGetter = delegate (object x)
             {
                 return Enums.GetEnumDescription((Allocated)((CsvRow)x).AllocatedCode);
             };
@@ -141,13 +144,13 @@ namespace DiamondInvoiceViewer
             formCustomizer.setTitleBar(panelControlBox);
             formCustomizer.setTitleLabel(labelWindowTitle);
             formCustomizer.setMenuStrip(menuStrip1);
-            formCustomizer.setIcon(pictureBoxWindowicon);
+            formCustomizer.setIcon(pbWindowicon);
             formCustomizer.setCloseButton(buttonClose);
             formCustomizer.setMaxiButton(buttonMax);
             formCustomizer.setMiniButton(buttonMin);
 
             panelContent.BackColor = formCustomizer.BackColor;
-            label1.ForeColor = formCustomizer.TitleBarColor;
+            lblStatus.ForeColor = formCustomizer.TitleBarColor;
 
             fastObjectListView1.BackColor = formCustomizer.BackColor;
             fastObjectListView1.ForeColor = formCustomizer.TextColor;
@@ -170,6 +173,7 @@ namespace DiamondInvoiceViewer
 
             base.Dispose(disposing);
         }
+
 
     }
 }

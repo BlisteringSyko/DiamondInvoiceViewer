@@ -1,7 +1,6 @@
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvoiceViewer.exe.config
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvoiceViewer.exe
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvoiceViewer.pdb
-C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\FormCustomizer.dll
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\Newtonsoft.Json.dll
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\ObjectListView.dll
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\FormCustomizer.pdb
@@ -14,6 +13,4 @@ C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvo
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.csproj.CopyComplete
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.exe
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.pdb
-C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvoiceViewer.exe.CodeAnalysisLog.xml
-C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvoiceViewer.exe.lastcodeanalysissucceeded
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.csprojAssemblyReference.cache
