@@ -3,7 +3,6 @@ C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvo
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\DiamondInvoiceViewer.pdb
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\Newtonsoft.Json.dll
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\ObjectListView.dll
-C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\FormCustomizer.pdb
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\Newtonsoft.Json.xml
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\ObjectListView.xml
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.Forms.AboutBox1.resources
