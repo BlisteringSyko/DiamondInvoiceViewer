@@ -22,9 +22,9 @@
             this.olvColItemCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColDiscount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColItemDesc = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.volcColCustomerLastName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.volcColCustomerFirstName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.volcColCustomerEmail = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColCustomerLastName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColCustomerFirstName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColCustomerEmail = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColRetailPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColUnitPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColInvoiceAmount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -42,7 +42,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openItemInPreviewsWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
@@ -63,6 +62,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbWindowicon = new System.Windows.Forms.PictureBox();
+            this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -78,9 +78,9 @@
             this.fastObjectListView1.AllColumns.Add(this.olvColItemCode);
             this.fastObjectListView1.AllColumns.Add(this.olvColDiscount);
             this.fastObjectListView1.AllColumns.Add(this.olvColItemDesc);
-            this.fastObjectListView1.AllColumns.Add(this.volcColCustomerLastName);
-            this.fastObjectListView1.AllColumns.Add(this.volcColCustomerFirstName);
-            this.fastObjectListView1.AllColumns.Add(this.volcColCustomerEmail);
+            this.fastObjectListView1.AllColumns.Add(this.olvColCustomerLastName);
+            this.fastObjectListView1.AllColumns.Add(this.olvColCustomerFirstName);
+            this.fastObjectListView1.AllColumns.Add(this.olvColCustomerEmail);
             this.fastObjectListView1.AllColumns.Add(this.olvColRetailPrice);
             this.fastObjectListView1.AllColumns.Add(this.olvColUnitPrice);
             this.fastObjectListView1.AllColumns.Add(this.olvColInvoiceAmount);
@@ -103,9 +103,9 @@
             this.olvColItemCode,
             this.olvColDiscount,
             this.olvColItemDesc,
-            this.volcColCustomerLastName,
-            this.volcColCustomerFirstName,
-            this.volcColCustomerEmail,
+            this.olvColCustomerLastName,
+            this.olvColCustomerFirstName,
+            this.olvColCustomerEmail,
             this.olvColRetailPrice,
             this.olvColUnitPrice,
             this.olvColInvoiceAmount,
@@ -166,23 +166,23 @@
             this.olvColItemDesc.MinimumWidth = 50;
             this.olvColItemDesc.Text = "Title";
             // 
-            // volcColCustomerLastName
+            // olvColCustomerLastName
             // 
-            this.volcColCustomerLastName.AspectName = "CustomerLastName";
-            this.volcColCustomerLastName.MinimumWidth = 50;
-            this.volcColCustomerLastName.Text = "Last Name";
+            this.olvColCustomerLastName.AspectName = "CustomerLastName";
+            this.olvColCustomerLastName.MinimumWidth = 50;
+            this.olvColCustomerLastName.Text = "Last Name";
             // 
-            // volcColCustomerFirstName
+            // olvColCustomerFirstName
             // 
-            this.volcColCustomerFirstName.AspectName = "CustomerFirstName";
-            this.volcColCustomerFirstName.MinimumWidth = 50;
-            this.volcColCustomerFirstName.Text = "First Name";
+            this.olvColCustomerFirstName.AspectName = "CustomerFirstName";
+            this.olvColCustomerFirstName.MinimumWidth = 50;
+            this.olvColCustomerFirstName.Text = "First Name";
             // 
-            // volcColCustomerEmail
+            // olvColCustomerEmail
             // 
-            this.volcColCustomerEmail.AspectName = "CustomerEmail";
-            this.volcColCustomerEmail.MinimumWidth = 50;
-            this.volcColCustomerEmail.Text = "Email";
+            this.olvColCustomerEmail.AspectName = "CustomerEmail";
+            this.olvColCustomerEmail.MinimumWidth = 50;
+            this.olvColCustomerEmail.Text = "Email";
             // 
             // olvColRetailPrice
             // 
@@ -292,27 +292,15 @@
             // 
             // panelContent
             // 
+            this.panelContent.Controls.Add(this.lblStatus);
             this.panelContent.Controls.Add(this.fastObjectListView1);
             this.panelContent.Controls.Add(this.SearchPanel);
             this.panelContent.Controls.Add(this.panelControlBox);
-            this.panelContent.Controls.Add(this.lblStatus);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.Location = new System.Drawing.Point(0, 0);
             this.panelContent.Name = "panelContent";
             this.panelContent.Size = new System.Drawing.Size(1132, 450);
             this.panelContent.TabIndex = 1;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AllowDrop = true;
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStatus.Font = new System.Drawing.Font("MV Boli", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(0, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(1132, 450);
-            this.lblStatus.TabIndex = 1;
-            this.lblStatus.Text = "Drag and drop your invoice csv file here";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // SearchPanel
             // 
@@ -495,6 +483,18 @@
             this.pbWindowicon.TabIndex = 5;
             this.pbWindowicon.TabStop = false;
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AllowDrop = true;
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblStatus.Font = new System.Drawing.Font("MV Boli", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(0, 55);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(1132, 395);
+            this.lblStatus.TabIndex = 1;
+            this.lblStatus.Text = "Drag and drop your invoice csv file here";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -564,9 +564,9 @@
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private BrightIdeasSoftware.OLVColumn volcColCustomerLastName;
-        private BrightIdeasSoftware.OLVColumn volcColCustomerFirstName;
-        private BrightIdeasSoftware.OLVColumn volcColCustomerEmail;
+        private BrightIdeasSoftware.OLVColumn olvColCustomerLastName;
+        private BrightIdeasSoftware.OLVColumn olvColCustomerFirstName;
+        private BrightIdeasSoftware.OLVColumn olvColCustomerEmail;
     }
 }
 
