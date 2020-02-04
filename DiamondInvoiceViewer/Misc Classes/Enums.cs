@@ -34,6 +34,9 @@ namespace DiamondInvoiceViewer.Misc_Classes
 
         [Description("Not Allocated")]
         OrderIncrease = 0,
+
+        [Description("")]
+        PullboxPlaceHolder = 2
     }
 
     public enum OrderType
@@ -108,7 +111,10 @@ namespace DiamondInvoiceViewer.Misc_Classes
         PostersPrintsPortfoliesCalendars = 14,
 
         [Description("Video/Audio/Video Games")]
-        VideoAudioVideoGames = 15
+        VideoAudioVideoGames = 15,
+
+        [Description("")]
+        PullboxPlaceHolder = 16
     }
 }
 

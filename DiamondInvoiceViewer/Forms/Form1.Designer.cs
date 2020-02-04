@@ -22,6 +22,9 @@
             this.olvColItemCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColDiscount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColItemDesc = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.volcColCustomerLastName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.volcColCustomerFirstName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.volcColCustomerEmail = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColRetailPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColUnitPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColInvoiceAmount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -52,14 +55,14 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbWindowicon = new System.Windows.Forms.PictureBox();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -75,6 +78,9 @@
             this.fastObjectListView1.AllColumns.Add(this.olvColItemCode);
             this.fastObjectListView1.AllColumns.Add(this.olvColDiscount);
             this.fastObjectListView1.AllColumns.Add(this.olvColItemDesc);
+            this.fastObjectListView1.AllColumns.Add(this.volcColCustomerLastName);
+            this.fastObjectListView1.AllColumns.Add(this.volcColCustomerFirstName);
+            this.fastObjectListView1.AllColumns.Add(this.volcColCustomerEmail);
             this.fastObjectListView1.AllColumns.Add(this.olvColRetailPrice);
             this.fastObjectListView1.AllColumns.Add(this.olvColUnitPrice);
             this.fastObjectListView1.AllColumns.Add(this.olvColInvoiceAmount);
@@ -97,6 +103,9 @@
             this.olvColItemCode,
             this.olvColDiscount,
             this.olvColItemDesc,
+            this.volcColCustomerLastName,
+            this.volcColCustomerFirstName,
+            this.volcColCustomerEmail,
             this.olvColRetailPrice,
             this.olvColUnitPrice,
             this.olvColInvoiceAmount,
@@ -105,6 +114,8 @@
             this.olvColPAF,
             this.olvColOrderNum,
             this.olvColUpc,
+            this.olvColIsbn,
+            this.olvColEan,
             this.olvColPO,
             this.olvColAllocated,
             this.olvColPublisher,
@@ -130,18 +141,21 @@
             // olvColUnitsShipped
             // 
             this.olvColUnitsShipped.AspectName = "UnitsShipped";
+            this.olvColUnitsShipped.MinimumWidth = 25;
             this.olvColUnitsShipped.Text = "Qty";
-            this.olvColUnitsShipped.Width = 35;
+            this.olvColUnitsShipped.Width = 50;
             // 
             // olvColItemCode
             // 
             this.olvColItemCode.AspectName = "ItemCode";
+            this.olvColItemCode.MinimumWidth = 50;
             this.olvColItemCode.Text = "Item";
             this.olvColItemCode.Width = 85;
             // 
             // olvColDiscount
             // 
             this.olvColDiscount.AspectName = "DiscountCode";
+            this.olvColDiscount.MinimumWidth = 50;
             this.olvColDiscount.Text = "Discount";
             this.olvColDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -149,50 +163,77 @@
             // 
             this.olvColItemDesc.AspectName = "ItemDescription";
             this.olvColItemDesc.FillsFreeSpace = true;
+            this.olvColItemDesc.MinimumWidth = 50;
             this.olvColItemDesc.Text = "Title";
+            // 
+            // volcColCustomerLastName
+            // 
+            this.volcColCustomerLastName.AspectName = "CustomerLastName";
+            this.volcColCustomerLastName.MinimumWidth = 50;
+            this.volcColCustomerLastName.Text = "Last Name";
+            // 
+            // volcColCustomerFirstName
+            // 
+            this.volcColCustomerFirstName.AspectName = "CustomerFirstName";
+            this.volcColCustomerFirstName.MinimumWidth = 50;
+            this.volcColCustomerFirstName.Text = "First Name";
+            // 
+            // volcColCustomerEmail
+            // 
+            this.volcColCustomerEmail.AspectName = "CustomerEmail";
+            this.volcColCustomerEmail.MinimumWidth = 50;
+            this.volcColCustomerEmail.Text = "Email";
             // 
             // olvColRetailPrice
             // 
             this.olvColRetailPrice.AspectName = "RetailPrice";
+            this.olvColRetailPrice.MinimumWidth = 50;
             this.olvColRetailPrice.Text = "Retail";
             this.olvColRetailPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // olvColUnitPrice
             // 
             this.olvColUnitPrice.AspectName = "UnitPrice";
+            this.olvColUnitPrice.MinimumWidth = 50;
             this.olvColUnitPrice.Text = "Cost";
             this.olvColUnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // olvColInvoiceAmount
             // 
             this.olvColInvoiceAmount.AspectName = "InvoiceAmount";
+            this.olvColInvoiceAmount.MinimumWidth = 50;
             this.olvColInvoiceAmount.Text = "Invoice";
             this.olvColInvoiceAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // olvColCatagory
             // 
             this.olvColCatagory.AspectName = "CatagoryCode";
+            this.olvColCatagory.MinimumWidth = 50;
             this.olvColCatagory.Text = "Catagory";
             // 
             // olvColOrderType
             // 
             this.olvColOrderType.AspectName = "OrderType";
+            this.olvColOrderType.MinimumWidth = 50;
             this.olvColOrderType.Text = "Type";
             // 
             // olvColPAF
             // 
             this.olvColPAF.AspectName = "ProcessedAsField";
+            this.olvColPAF.MinimumWidth = 50;
             this.olvColPAF.Text = "Original";
             // 
             // olvColOrderNum
             // 
             this.olvColOrderNum.AspectName = "OrderNumber";
+            this.olvColOrderNum.MinimumWidth = 50;
             this.olvColOrderNum.Text = "Order#";
             this.olvColOrderNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // olvColUpc
             // 
             this.olvColUpc.AspectName = "Upc";
+            this.olvColUpc.MinimumWidth = 50;
             this.olvColUpc.Text = "Upc";
             this.olvColUpc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvColUpc.Width = 100;
@@ -200,38 +241,40 @@
             // olvColIsbn
             // 
             this.olvColIsbn.AspectName = "Isbn";
-            this.olvColIsbn.DisplayIndex = 12;
-            this.olvColIsbn.IsVisible = false;
+            this.olvColIsbn.MinimumWidth = 50;
             this.olvColIsbn.Text = "Isbn";
             this.olvColIsbn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // olvColEan
             // 
             this.olvColEan.AspectName = "Ean";
-            this.olvColEan.DisplayIndex = 13;
-            this.olvColEan.IsVisible = false;
+            this.olvColEan.MinimumWidth = 50;
             this.olvColEan.Text = "Ean";
             this.olvColEan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // olvColPO
             // 
             this.olvColPO.AspectName = "PoNumber";
+            this.olvColPO.MinimumWidth = 50;
             this.olvColPO.Text = "PO";
             this.olvColPO.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // olvColAllocated
             // 
             this.olvColAllocated.AspectName = "AllocatedCode";
+            this.olvColAllocated.MinimumWidth = 50;
             this.olvColAllocated.Text = "Allocated";
             // 
             // olvColPublisher
             // 
             this.olvColPublisher.AspectName = "Publisher";
+            this.olvColPublisher.MinimumWidth = 50;
             this.olvColPublisher.Text = "Publisher";
             // 
             // olvColSeriesCode
             // 
             this.olvColSeriesCode.AspectName = "SeriesCode";
+            this.olvColSeriesCode.MinimumWidth = 50;
             this.olvColSeriesCode.Text = "Series";
             // 
             // contextMenuStrip1
@@ -249,10 +292,10 @@
             // 
             // panelContent
             // 
-            this.panelContent.Controls.Add(this.lblStatus);
             this.panelContent.Controls.Add(this.fastObjectListView1);
             this.panelContent.Controls.Add(this.SearchPanel);
             this.panelContent.Controls.Add(this.panelControlBox);
+            this.panelContent.Controls.Add(this.lblStatus);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.Location = new System.Drawing.Point(0, 0);
             this.panelContent.Name = "panelContent";
@@ -264,9 +307,9 @@
             this.lblStatus.AllowDrop = true;
             this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStatus.Font = new System.Drawing.Font("MV Boli", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(0, 55);
+            this.lblStatus.Location = new System.Drawing.Point(0, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(1132, 395);
+            this.lblStatus.Size = new System.Drawing.Size(1132, 450);
             this.lblStatus.TabIndex = 1;
             this.lblStatus.Text = "Drag and drop your invoice csv file here";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -319,9 +362,9 @@
             // labelWindowTitle
             // 
             this.labelWindowTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelWindowTitle.Location = new System.Drawing.Point(268, 0);
+            this.labelWindowTitle.Location = new System.Drawing.Point(148, 0);
             this.labelWindowTitle.Name = "labelWindowTitle";
-            this.labelWindowTitle.Size = new System.Drawing.Size(744, 22);
+            this.labelWindowTitle.Size = new System.Drawing.Size(864, 22);
             this.labelWindowTitle.TabIndex = 0;
             this.labelWindowTitle.Text = "label1";
             this.labelWindowTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -366,7 +409,7 @@
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip1.Location = new System.Drawing.Point(22, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(246, 22);
+            this.menuStrip1.Size = new System.Drawing.Size(126, 22);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -386,19 +429,30 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.clearToolStripMenuItem.Text = "Clear";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -440,17 +494,6 @@
             this.pbWindowicon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbWindowicon.TabIndex = 5;
             this.pbWindowicon.TabStop = false;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
-            // 
-            // clearToolStripMenuItem
-            // 
-            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.clearToolStripMenuItem.Text = "Clear";
             // 
             // Form1
             // 
@@ -521,6 +564,9 @@
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private BrightIdeasSoftware.OLVColumn volcColCustomerLastName;
+        private BrightIdeasSoftware.OLVColumn volcColCustomerFirstName;
+        private BrightIdeasSoftware.OLVColumn volcColCustomerEmail;
     }
 }
 

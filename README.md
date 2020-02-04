@@ -15,7 +15,7 @@ You can Edit > Search (Ctrl - F) and type into the search box to filter and high
 ![Search Items](https://raw.githubusercontent.com/BlisteringSyko/DiamondInvoiceViewer/master/Readme-Images/ImgSearch.png)
 
 You can right click the column headers for even more options. 
-![Column filters](https://raw.githubusercontent.com/BlisteringSyko/DiamondInvoiceViewer/master/Readme-Images/ImgColums.png)
+![Column filters](https://raw.githubusercontent.com/BlisteringSyko/DiamondInvoiceViewer/master/Readme-Images/ImgColumns.png)
 
-
-
+You also view your PullBox PickList Csv. 
+![Column filters](https://raw.githubusercontent.com/BlisteringSyko/DiamondInvoiceViewer/master/Readme-Images/PickList.png)

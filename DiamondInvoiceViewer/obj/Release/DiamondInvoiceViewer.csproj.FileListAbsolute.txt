@@ -13,3 +13,4 @@ C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvo
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.exe
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.pdb
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.csprojAssemblyReference.cache
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\FormCustomizer.dll

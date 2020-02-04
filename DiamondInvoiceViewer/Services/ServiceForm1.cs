@@ -212,12 +212,14 @@ namespace DiamondInvoiceViewer
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
                 bool invoiceData = false;
+                bool pullboxData = false;
                 int row = 0;
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
 
                     if (fields[0] == "Invoice on Disk") invoiceData = true;
+                    if (fields[0] == "Customer Email" && fields[10] == "Qty") pullboxData = true;
 
                     if (invoiceData && fields.Length == 1 && row == 1) Title = $"Diamond Invoice Parser (Viewer: {fields[0]})"; // <<< The value is set, but the binding for form1 is not taking the value.
 
@@ -225,10 +227,46 @@ namespace DiamondInvoiceViewer
 
                     if (invoiceData && fields.Length == 9) csvRows.Add(ParseNormalInvoice(fields));
 
+                    if (pullboxData && fields.Length == 11 && fields[0] != "Customer Email") csvRows.Add(ParsePullBoxInvoice(fields));
+
                     if (invoiceData && fields.Length == 18) csvRows.Add(ParseExtendedInvoice(fields));
                 }
             }
             return csvRows;
+        }
+
+        CsvRow ParsePullBoxInvoice(string[] fields)
+        {
+            int column = 0;
+            CsvRow csvRow = new CsvRow();
+            foreach (string field in fields)
+            {
+                switch (column)
+                {
+                    case 0:
+                        csvRow.CustomerEmail = field;
+                        csvRow.CatagoryCode = 16;
+                        csvRow.AllocatedCode = 3;
+                        break;
+                    case 1:
+                        csvRow.CustomerFirstName = field;
+                        break;
+                    case 2:
+                        csvRow.CustomerLastName = field;
+                        break;
+                    case 8:
+                        csvRow.ItemCode = field;
+                        break;
+                    case 9:
+                        csvRow.ItemDescription = field;
+                        break;
+                    case 10:
+                        csvRow.UnitsShipped = int.Parse(field);
+                        break;
+                }
+                column += 1;
+            }
+            return csvRow;
         }
 
         CsvRow ParseNormalInvoice(string[] fields)
