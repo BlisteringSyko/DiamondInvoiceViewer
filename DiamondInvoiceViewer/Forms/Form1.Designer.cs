@@ -19,11 +19,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.fastObjectListView1 = new BrightIdeasSoftware.FastObjectListView();
             this.olvColUnitsShipped = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColImage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColItemCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColDiscount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColItemDesc = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColCustomerLastName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColCustomerFirstName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColCustomerLastName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColCustomerEmail = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColRetailPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColUnitPrice = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -42,6 +43,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openItemInPreviewsWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelContent = new System.Windows.Forms.Panel();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
@@ -59,10 +61,11 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbWindowicon = new System.Windows.Forms.PictureBox();
-            this.lblStatus = new System.Windows.Forms.Label();
+            this.downloadImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -75,11 +78,12 @@
             // fastObjectListView1
             // 
             this.fastObjectListView1.AllColumns.Add(this.olvColUnitsShipped);
+            this.fastObjectListView1.AllColumns.Add(this.olvColImage);
             this.fastObjectListView1.AllColumns.Add(this.olvColItemCode);
             this.fastObjectListView1.AllColumns.Add(this.olvColDiscount);
             this.fastObjectListView1.AllColumns.Add(this.olvColItemDesc);
-            this.fastObjectListView1.AllColumns.Add(this.olvColCustomerLastName);
             this.fastObjectListView1.AllColumns.Add(this.olvColCustomerFirstName);
+            this.fastObjectListView1.AllColumns.Add(this.olvColCustomerLastName);
             this.fastObjectListView1.AllColumns.Add(this.olvColCustomerEmail);
             this.fastObjectListView1.AllColumns.Add(this.olvColRetailPrice);
             this.fastObjectListView1.AllColumns.Add(this.olvColUnitPrice);
@@ -100,11 +104,12 @@
             this.fastObjectListView1.CellEditUseWholeCell = false;
             this.fastObjectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColUnitsShipped,
+            this.olvColImage,
             this.olvColItemCode,
             this.olvColDiscount,
             this.olvColItemDesc,
-            this.olvColCustomerLastName,
             this.olvColCustomerFirstName,
+            this.olvColCustomerLastName,
             this.olvColCustomerEmail,
             this.olvColRetailPrice,
             this.olvColUnitPrice,
@@ -127,6 +132,7 @@
             this.fastObjectListView1.HideSelection = false;
             this.fastObjectListView1.Location = new System.Drawing.Point(0, 55);
             this.fastObjectListView1.Name = "fastObjectListView1";
+            this.fastObjectListView1.RowHeight = 100;
             this.fastObjectListView1.ShowCommandMenuOnRightClick = true;
             this.fastObjectListView1.ShowGroups = false;
             this.fastObjectListView1.Size = new System.Drawing.Size(1132, 395);
@@ -144,6 +150,11 @@
             this.olvColUnitsShipped.MinimumWidth = 25;
             this.olvColUnitsShipped.Text = "Qty";
             this.olvColUnitsShipped.Width = 50;
+            // 
+            // olvColImage
+            // 
+            this.olvColImage.Text = "Image";
+            this.olvColImage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvColItemCode
             // 
@@ -166,17 +177,17 @@
             this.olvColItemDesc.MinimumWidth = 50;
             this.olvColItemDesc.Text = "Title";
             // 
-            // olvColCustomerLastName
-            // 
-            this.olvColCustomerLastName.AspectName = "CustomerLastName";
-            this.olvColCustomerLastName.MinimumWidth = 50;
-            this.olvColCustomerLastName.Text = "Last Name";
-            // 
             // olvColCustomerFirstName
             // 
             this.olvColCustomerFirstName.AspectName = "CustomerFirstName";
             this.olvColCustomerFirstName.MinimumWidth = 50;
             this.olvColCustomerFirstName.Text = "First Name";
+            // 
+            // olvColCustomerLastName
+            // 
+            this.olvColCustomerLastName.AspectName = "CustomerLastName";
+            this.olvColCustomerLastName.MinimumWidth = 50;
+            this.olvColCustomerLastName.Text = "Last Name";
             // 
             // olvColCustomerEmail
             // 
@@ -302,6 +313,18 @@
             this.panelContent.Size = new System.Drawing.Size(1132, 450);
             this.panelContent.TabIndex = 1;
             // 
+            // lblStatus
+            // 
+            this.lblStatus.AllowDrop = true;
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblStatus.Font = new System.Drawing.Font("MV Boli", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(0, 55);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(1132, 395);
+            this.lblStatus.TabIndex = 1;
+            this.lblStatus.Text = "Drag and drop your invoice csv file here";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // SearchPanel
             // 
             this.SearchPanel.Controls.Add(this.SearchTextBox);
@@ -350,9 +373,9 @@
             // labelWindowTitle
             // 
             this.labelWindowTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelWindowTitle.Location = new System.Drawing.Point(148, 0);
+            this.labelWindowTitle.Location = new System.Drawing.Point(268, 0);
             this.labelWindowTitle.Name = "labelWindowTitle";
-            this.labelWindowTitle.Size = new System.Drawing.Size(864, 22);
+            this.labelWindowTitle.Size = new System.Drawing.Size(744, 22);
             this.labelWindowTitle.TabIndex = 0;
             this.labelWindowTitle.Text = "label1";
             this.labelWindowTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -397,7 +420,7 @@
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip1.Location = new System.Drawing.Point(22, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(126, 22);
+            this.menuStrip1.Size = new System.Drawing.Size(246, 22);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -446,7 +469,9 @@
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.searchToolStripMenuItem});
+            this.searchToolStripMenuItem,
+            this.showImagesToolStripMenuItem,
+            this.downloadImagesToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 19);
             this.editToolStripMenuItem.Text = "Edit";
@@ -455,8 +480,17 @@
             // 
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
             this.searchToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.searchToolStripMenuItem.Text = "Search";
+            // 
+            // showImagesToolStripMenuItem
+            // 
+            this.showImagesToolStripMenuItem.Checked = true;
+            this.showImagesToolStripMenuItem.CheckOnClick = true;
+            this.showImagesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showImagesToolStripMenuItem.Name = "showImagesToolStripMenuItem";
+            this.showImagesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showImagesToolStripMenuItem.Text = "Show Images";
             // 
             // helpToolStripMenuItem
             // 
@@ -483,17 +517,14 @@
             this.pbWindowicon.TabIndex = 5;
             this.pbWindowicon.TabStop = false;
             // 
-            // lblStatus
+            // downloadImagesToolStripMenuItem
             // 
-            this.lblStatus.AllowDrop = true;
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStatus.Font = new System.Drawing.Font("MV Boli", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(0, 55);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(1132, 395);
-            this.lblStatus.TabIndex = 1;
-            this.lblStatus.Text = "Drag and drop your invoice csv file here";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.downloadImagesToolStripMenuItem.Checked = true;
+            this.downloadImagesToolStripMenuItem.CheckOnClick = true;
+            this.downloadImagesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.downloadImagesToolStripMenuItem.Name = "downloadImagesToolStripMenuItem";
+            this.downloadImagesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downloadImagesToolStripMenuItem.Text = "Download Images";
             // 
             // Form1
             // 
@@ -567,6 +598,9 @@
         private BrightIdeasSoftware.OLVColumn olvColCustomerLastName;
         private BrightIdeasSoftware.OLVColumn olvColCustomerFirstName;
         private BrightIdeasSoftware.OLVColumn olvColCustomerEmail;
+        private BrightIdeasSoftware.OLVColumn olvColImage;
+        private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downloadImagesToolStripMenuItem;
     }
 }
 

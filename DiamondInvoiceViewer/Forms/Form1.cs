@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
-using BrightIdeasSoftware;
 using DiamondInvoiceViewer.Misc_Classes;
 using DiamondInvoiceViewer.Services;
 using formCustomizer;
@@ -28,6 +28,7 @@ namespace DiamondInvoiceViewer
             SearchTextBox.Tag = tag;
             searchToolStripMenuItem.Tag = tag;
             clearToolStripMenuItem.Tag = tag;
+            showImagesToolStripMenuItem.Tag = tag;
 
             base.SetStyle(ControlStyles.ResizeRedraw, true);
             base.SetStyle(ControlStyles.UserPaint, true);
@@ -53,6 +54,33 @@ namespace DiamondInvoiceViewer
             formCustomizer._exclusions.Add(lblStatus);
 
             formCustomizer.updateControlStyles(this);
+
+            olvColUnitsShipped.DisplayIndex = 0;
+            olvColImage.DisplayIndex = 1;
+            olvColItemCode.DisplayIndex = 2;
+            olvColDiscount.DisplayIndex = 3;
+            olvColItemDesc.DisplayIndex = 4;
+            olvColCustomerFirstName.DisplayIndex = 5;
+            olvColCustomerLastName.DisplayIndex = 6;
+            olvColCustomerEmail.DisplayIndex = 7;
+            olvColRetailPrice.DisplayIndex = 8;
+            olvColUnitPrice.DisplayIndex = 9;
+            olvColInvoiceAmount.DisplayIndex = 10;
+            olvColCatagory.DisplayIndex = 11;
+            olvColOrderType.DisplayIndex = 12;
+            olvColPAF.DisplayIndex = 13;
+            olvColOrderNum.DisplayIndex = 14;
+            olvColUpc.DisplayIndex = 15;
+            olvColIsbn.DisplayIndex = 16;
+            olvColEan.DisplayIndex = 17;
+            olvColPO.DisplayIndex = 18;
+            olvColAllocated.DisplayIndex = 19;
+            olvColPublisher.DisplayIndex = 20;
+            olvColSeriesCode.DisplayIndex = 21;
+
+            showImagesToolStripMenuItem.Checked = service.ShowImages;
+            downloadImagesToolStripMenuItem.Checked = service.DownloadImages;
+
         }
 
         void RegisterEvents()
@@ -83,6 +111,12 @@ namespace DiamondInvoiceViewer
             this.searchToolStripMenuItem.Click += new System.EventHandler(service.searchToolStripMenuItem_Click);
 
             this.clearToolStripMenuItem.Click += new System.EventHandler(service.clearToolStripMenuItem_Click);
+
+            this.fastObjectListView1.CellClick += new System.EventHandler<BrightIdeasSoftware.CellClickEventArgs>(service.fastObjectListView1_CellClick);
+
+            this.showImagesToolStripMenuItem.CheckStateChanged += new System.EventHandler(service.showImagesToolStripMenuItem_CheckStateChanged);
+
+            this.downloadImagesToolStripMenuItem.CheckStateChanged += new System.EventHandler(service.downloadImagesToolStripMenuItem_CheckStateChanged);
         }
 
         void RegisterBindings()
@@ -99,7 +133,6 @@ namespace DiamondInvoiceViewer
                 {
                     return ((CsvRow)x).ProcessedAsField;
                 }
-
                 return ((CsvRow)x).ItemCode;
             };
             olvColCatagory.AspectGetter = delegate (object x)
@@ -116,12 +149,23 @@ namespace DiamondInvoiceViewer
                 {
                     return ((CsvRow)x).ItemCode;
                 }
-
                 return ((CsvRow)x).ProcessedAsField;
             };
             olvColAllocated.AspectGetter = delegate (object x)
             {
                 return Enums.GetEnumDescription((Allocated)((CsvRow)x).AllocatedCode);
+            };
+            olvColImage.ImageGetter = delegate (object x)
+            {
+                if (service.ShowImages)
+                {
+                    string path = Application.StartupPath + @"\Thumbs\" + ((CsvRow)x).ItemCode + ".jpg";
+                    if (File.Exists(path))
+                    {
+                        return (Bitmap)Bitmap.FromFile(path);
+                    }
+                }
+                return null;
             };
         }
 

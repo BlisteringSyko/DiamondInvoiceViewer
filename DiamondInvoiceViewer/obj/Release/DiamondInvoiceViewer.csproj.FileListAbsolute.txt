@@ -14,3 +14,9 @@ C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvo
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.pdb
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.csprojAssemblyReference.cache
 C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\FormCustomizer.dll
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\AngleSharp.dll
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\System.Text.Encoding.CodePages.dll
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\AngleSharp.xml
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\VS Projects\DiamondInvoiceViewer\DiamondInvoiceViewer\obj\Release\DiamondInvoiceViewer.Forms.ItemDetails.resources

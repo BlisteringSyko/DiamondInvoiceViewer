@@ -10,6 +10,12 @@ using DiamondInvoiceViewer.Forms;
 using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
 using DiamondInvoiceViewer.Misc_Classes;
+using AngleSharp;
+using AngleSharp.Html.Dom;
+using AngleSharp.Dom;
+using System.Linq;
+using System.Net;
+using System.IO;
 
 namespace DiamondInvoiceViewer
 {
@@ -19,10 +25,15 @@ namespace DiamondInvoiceViewer
 
         readonly string SettingsPath;
 
+        public bool ShowImages { get; set; }
+        public bool DownloadImages { get; set; }
+
         public ServiceForm1()
         {
             Title = "Diamond Invoice Viewer";
             SettingsPath = Application.StartupPath + @"/Settings.json";
+            ShowImages = true;
+            DownloadImages = true;
         }
 
         public void LoadSettings(object sender)
@@ -38,15 +49,24 @@ namespace DiamondInvoiceViewer
                 }
                 if (Settings.LocationX.HasValue && Settings.LocationY.HasValue)
                 {
-                    ((Form)sender).Location = new Point(Settings.LocationX.Value, Settings.LocationY.Value);
+                    //((Form)sender).Location = new Point(Settings.LocationX.Value, Settings.LocationY.Value);
                 }
                 if (Settings.Height.HasValue)
                 {
-                    ((Form)sender).Height = Settings.Height.Value;
+                    //((Form)sender).Height = Settings.Height.Value;
                 }
                 if (Settings.Width.HasValue)
                 {
-                    ((Form)sender).Width = Settings.Width.Value;
+                    //((Form)sender).Width = Settings.Width.Value;
+                }
+                if (Settings.ShowImages.HasValue)
+                {
+                    ShowImages = Settings.ShowImages.Value;
+                }
+
+                if (Settings.DownloadImages.HasValue)
+                {
+                    DownloadImages = Settings.DownloadImages.Value;
                 }
             }
         }
@@ -59,6 +79,8 @@ namespace DiamondInvoiceViewer
             Settings.LocationY = ((Form)sender).Location.Y;
             Settings.Height = ((Form)sender).Height;
             Settings.Width = ((Form)sender).Width;
+            Settings.ShowImages = ShowImages;
+            Settings.DownloadImages = DownloadImages;
 
             string raw = JsonConvert.SerializeObject(Settings, Formatting.Indented);
 
@@ -76,6 +98,36 @@ namespace DiamondInvoiceViewer
             {
                 OlvSelectedItem = null;
             }
+        }
+
+
+        internal void fastObjectListView1_CellClick(object sender, CellClickEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                string itemcode = ((CsvRow)e.Model).ItemCode;
+                ItemDetails iD = new ItemDetails(Application.StartupPath + $"\\Images\\{itemcode}.jpg", itemcode);
+                iD.Show();
+            }
+        }
+
+        internal void showImagesToolStripMenuItem_CheckStateChanged(object sender, System.EventArgs e)
+        {
+            ShowImages = ((ToolStripMenuItem)sender).Checked;
+            if (((ToolStripMenuItem)sender).Checked)
+            {
+                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.RowHeight = 100;
+            }
+            else
+            {
+                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.RowHeight = 20;
+                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.Refresh();
+            }
+        }
+
+        internal void downloadImagesToolStripMenuItem_CheckStateChanged(object sender, System.EventArgs e)
+        {
+            DownloadImages = ((ToolStripMenuItem)sender).Checked;
         }
 
         internal void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -111,28 +163,28 @@ namespace DiamondInvoiceViewer
         }
 
         #region "OpenFile"
-        internal void openToolStripMenuItem_Click(object sender, System.EventArgs e)
+        internal async void openToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Comma Separated Value (*.csv)|*.csv";
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.SetObjects(ParseCsv(ofd.FileName));
+                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.SetObjects(await ParseCsvAsync(ofd.FileName));
                 ((Tags)((ToolStripMenuItem)sender).Tag).Form.Text = Title;
                 ((Tags)((ToolStripMenuItem)sender).Tag).StatusLabel.Hide();
                 ((Tags)((ToolStripMenuItem)sender).Tag).Form.Refresh();
             }
         }
 
-        internal void label1_Click(object sender, System.EventArgs e)
+        internal async void label1_Click(object sender, System.EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Comma Separated Value (*.csv)|*.csv";
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(ParseCsv(ofd.FileName));
+                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(await ParseCsvAsync(ofd.FileName));
                 ((Tags)((Label)sender).Tag).Form.Text = Title;
                 ((Tags)((Label)sender).Tag).StatusLabel.Hide();
                 ((Tags)((Label)sender).Tag).Form.Refresh();
@@ -171,12 +223,12 @@ namespace DiamondInvoiceViewer
         #endregion
 
         #region "Drag & Drop"
-        internal void fastObjectListView1_DragDrop(object sender, DragEventArgs e)
+        internal async void fastObjectListView1_DragDrop(object sender, DragEventArgs e)
         {
             string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (!(fileList is null) && System.IO.File.Exists(fileList[0]))
             {
-                ((FastObjectListView)sender).SetObjects(ParseCsv(fileList[0]));
+                ((FastObjectListView)sender).SetObjects(await ParseCsvAsync(fileList[0]));
                 ((Tags)((FastObjectListView)sender).Tag).Form.Text = Title;
                 ((Tags)((FastObjectListView)sender).Tag).Form.Refresh();
             }
@@ -190,12 +242,12 @@ namespace DiamondInvoiceViewer
         {
             e.Effect = DragDropEffects.Copy;
         }
-        internal void label1_DragDrop(object sender, DragEventArgs e)
+        internal async void label1_DragDrop(object sender, DragEventArgs e)
         {
             string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (!(fileList is null) && System.IO.File.Exists(fileList[0]))
             {
-                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(ParseCsv(fileList[0]));
+                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(await ParseCsvAsync(fileList[0]));
                 ((Tags)((Label)sender).Tag).Form.Text = Title;
                 ((Label)sender).Hide();
                 ((Tags)((Label)sender).Tag).Form.Refresh();
@@ -204,7 +256,7 @@ namespace DiamondInvoiceViewer
         #endregion
 
         #region "Parse Csv"
-        internal List<CsvRow> ParseCsv(string PathToFile)
+        internal async System.Threading.Tasks.Task<List<CsvRow>> ParseCsvAsync(string PathToFile)
         {
             List<CsvRow> csvRows = new List<CsvRow>();
             using (TextFieldParser parser = new TextFieldParser(PathToFile))
@@ -225,17 +277,20 @@ namespace DiamondInvoiceViewer
 
                     if (invoiceData) row += 1;
 
-                    if (invoiceData && fields.Length == 9) csvRows.Add(ParseNormalInvoice(fields));
+                    if (invoiceData && fields.Length == 9) csvRows.Add(await ParseNormalInvoiceAsync(fields));
 
-                    if (pullboxData && fields.Length == 11 && fields[0] != "Customer Email") csvRows.Add(ParsePullBoxInvoice(fields));
-
-                    if (invoiceData && fields.Length == 18) csvRows.Add(ParseExtendedInvoice(fields));
+                    if (pullboxData && fields.Length == 11 && fields[0] != "Customer Email")
+                    {
+                        csvRows.Add(await ParsePullBoxInvoiceAsync(fields));
+                        Title = "Diamond Invoice Parser";
+                    }
+                    if (invoiceData && fields.Length == 18) csvRows.Add(await ParseExtendedInvoiceAsync(fields));
                 }
             }
             return csvRows;
         }
 
-        CsvRow ParsePullBoxInvoice(string[] fields)
+        async System.Threading.Tasks.Task<CsvRow> ParsePullBoxInvoiceAsync(string[] fields)
         {
             int column = 0;
             CsvRow csvRow = new CsvRow();
@@ -266,10 +321,15 @@ namespace DiamondInvoiceViewer
                 }
                 column += 1;
             }
+            if (DownloadImages && (!File.Exists(Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg") || !File.Exists(Application.StartupPath + $"\\Thumbs\\{csvRow.ItemCode}.jpg")))
+            {
+                string img = await GetItemImageUrlAsync($"https://www.previewsworld.com/Catalog/{csvRow.ItemCode}");
+                SaveImage(img, Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg", csvRow.ItemCode);
+            }
             return csvRow;
         }
 
-        CsvRow ParseNormalInvoice(string[] fields)
+        async System.Threading.Tasks.Task<CsvRow> ParseNormalInvoiceAsync(string[] fields)
         {
             int column = 0;
             CsvRow csvRow = new CsvRow();
@@ -281,7 +341,14 @@ namespace DiamondInvoiceViewer
                         csvRow.UnitsShipped = int.Parse(field);
                         break;
                     case 1:
-                        csvRow.ItemCode = field;
+                        if (Char.IsLetter(field[field.Length - 1]))
+                        {
+                            csvRow.ItemCode = field.Substring(0, field.Length - 1);
+                        }
+                        else
+                        {
+                            csvRow.ItemCode = field;
+                        }
                         break;
                     case 2:
                         csvRow.ItemDescription = field;
@@ -307,10 +374,16 @@ namespace DiamondInvoiceViewer
                 }
                 column += 1;
             }
+            
+            if (DownloadImages && (!File.Exists(Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg") || !File.Exists(Application.StartupPath + $"\\Thumbs\\{csvRow.ItemCode}.jpg")))
+            {
+                string img = await GetItemImageUrlAsync($"https://www.previewsworld.com/Catalog/{csvRow.ItemCode}");
+                SaveImage(img, Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg", csvRow.ItemCode);
+            }
             return csvRow;
         }
 
-        CsvRow ParseExtendedInvoice(string[] fields)
+        async System.Threading.Tasks.Task<CsvRow> ParseExtendedInvoiceAsync(string[] fields)
         {
             int column = 0;
             CsvRow csvRow = new CsvRow();
@@ -376,9 +449,52 @@ namespace DiamondInvoiceViewer
                 }
                 column += 1;
             }
+            if (DownloadImages && (!File.Exists(Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg") || !File.Exists(Application.StartupPath + $"\\Thumbs\\{csvRow.ItemCode}.jpg")))
+            {
+                string img = await GetItemImageUrlAsync($"https://www.previewsworld.com/Catalog/{csvRow.ItemCode}");
+                SaveImage(img, Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg", csvRow.ItemCode);
+            }
             return csvRow;
         }
         #endregion
+
+        async System.Threading.Tasks.Task<string> GetItemImageUrlAsync(string address)
+        {
+            var config = Configuration.Default.WithDefaultLoader();
+            string imageUrl = (await BrowsingContext.New(config).OpenAsync(address))
+                .DocumentElement.Descendents()
+                .Where(x => x.NodeType == NodeType.Element)
+                .OfType<IHtmlMetaElement>()
+                .Where(x => x.Attributes["property"]?.Value == "og:image")
+                .Select(x => x.Attributes["content"]?.Value)
+                .FirstOrDefault();
+
+            return imageUrl;
+        }
+
+        public void SaveImage(string imageUrl, string filename, string itemcode)
+        {
+            if (!Directory.Exists(Application.StartupPath + @"\Images"))
+            {
+                Directory.CreateDirectory(Application.StartupPath + @"\Images");
+            }
+            if (!Directory.Exists(Application.StartupPath + @"\Thumbs"))
+            {
+                Directory.CreateDirectory(Application.StartupPath + @"\Thumbs");
+            }
+
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(new Uri(imageUrl), filename);
+                Bitmap original = (Bitmap)Bitmap.FromFile(filename);
+                int w = original.Width / (original.Height / 100);
+                Bitmap resized = new Bitmap(original, new Size(w, 100));
+                resized.Save(Application.StartupPath + @"\Thumbs\" + itemcode + ".jpg");
+                original.Dispose();
+                resized.Dispose();
+            }
+
+        }
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
