@@ -18,7 +18,7 @@ namespace DiamondInvoiceViewer
             InitializeComponent();
             service = new ServiceForm1();
 
-            Tags tag = new Tags(this, lblStatus, fastObjectListView1, SearchPanel, SearchTextBox);
+            Tags tag = new Tags(this, lblStatus, fastObjectListView1, SearchPanel, SearchTextBox, progressBar1);
 
             this.Tag = tag;
             fastObjectListView1.Tag = tag;
@@ -55,28 +55,52 @@ namespace DiamondInvoiceViewer
 
             formCustomizer.updateControlStyles(this);
 
-            olvColUnitsShipped.DisplayIndex = 0;
-            olvColImage.DisplayIndex = 1;
-            olvColItemCode.DisplayIndex = 2;
-            olvColDiscount.DisplayIndex = 3;
-            olvColItemDesc.DisplayIndex = 4;
-            olvColCustomerFirstName.DisplayIndex = 5;
-            olvColCustomerLastName.DisplayIndex = 6;
-            olvColCustomerEmail.DisplayIndex = 7;
-            olvColRetailPrice.DisplayIndex = 8;
-            olvColUnitPrice.DisplayIndex = 9;
-            olvColInvoiceAmount.DisplayIndex = 10;
-            olvColCatagory.DisplayIndex = 11;
-            olvColOrderType.DisplayIndex = 12;
-            olvColPAF.DisplayIndex = 13;
-            olvColOrderNum.DisplayIndex = 14;
-            olvColUpc.DisplayIndex = 15;
-            olvColIsbn.DisplayIndex = 16;
-            olvColEan.DisplayIndex = 17;
-            olvColPO.DisplayIndex = 18;
-            olvColAllocated.DisplayIndex = 19;
-            olvColPublisher.DisplayIndex = 20;
-            olvColSeriesCode.DisplayIndex = 21;
+            if (olvColUnitsShipped.IsVisible) olvColUnitsShipped.DisplayIndex = 0;
+            if (olvColImage.IsVisible) olvColImage.DisplayIndex = 1;
+            if (olvColItemCode.IsVisible) olvColItemCode.DisplayIndex = 2;
+            if (olvColDiscount.IsVisible) olvColDiscount.DisplayIndex = 3;
+            if (olvColItemDesc.IsVisible) olvColItemDesc.DisplayIndex = 4;
+            if (olvColCustomerFirstName.IsVisible) olvColCustomerFirstName.DisplayIndex = 5;
+            if (olvColCustomerLastName.IsVisible) olvColCustomerLastName.DisplayIndex = 6;
+            if (olvColCustomerEmail.IsVisible) olvColCustomerEmail.DisplayIndex = 7;
+            if (olvColRetailPrice.IsVisible) olvColRetailPrice.DisplayIndex = 8;
+            if (olvColUnitPrice.IsVisible) olvColUnitPrice.DisplayIndex = 9;
+            if (olvColInvoiceAmount.IsVisible) olvColInvoiceAmount.DisplayIndex = 10;
+            if (olvColCatagory.IsVisible) olvColCatagory.DisplayIndex = 11;
+            if (olvColOrderType.IsVisible) olvColOrderType.DisplayIndex = 12;
+            if (olvColPAF.IsVisible) olvColPAF.DisplayIndex = 13;
+            if (olvColOrderNum.IsVisible) olvColOrderNum.DisplayIndex = 14;
+            if (olvColUpc.IsVisible) olvColUpc.DisplayIndex = 15;
+            if (olvColIsbn.IsVisible) olvColIsbn.DisplayIndex = 16;
+            if (olvColEan.IsVisible) olvColEan.DisplayIndex = 17;
+            if (olvColPO.IsVisible) olvColPO.DisplayIndex = 18;
+            if (olvColAllocated.IsVisible) olvColAllocated.DisplayIndex = 19;
+            if (olvColPublisher.IsVisible) olvColPublisher.DisplayIndex = 20;
+            if (olvColSeriesCode.IsVisible) olvColSeriesCode.DisplayIndex = 21;
+
+
+            //olvColUnitsShipped.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColImage.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColItemCode.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColDiscount.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColItemDesc.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColCustomerFirstName.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColCustomerLastName.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColCustomerEmail.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColRetailPrice.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColUnitPrice.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColInvoiceAmount.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColCatagory.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColOrderType.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColPAF.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColOrderNum.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColUpc.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColIsbn.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColEan.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColPO.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColAllocated.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColPublisher.DisplayIndex = fastObjectListView1.Columns.Count - 1;
+            //olvColSeriesCode.DisplayIndex = fastObjectListView1.Columns.Count - 1;
 
             showImagesToolStripMenuItem.Checked = service.ShowImages;
             downloadImagesToolStripMenuItem.Checked = service.DownloadImages;

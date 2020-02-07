@@ -16,6 +16,8 @@ using AngleSharp.Dom;
 using System.Linq;
 using System.Net;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DiamondInvoiceViewer
 {
@@ -107,6 +109,7 @@ namespace DiamondInvoiceViewer
             {
                 string itemcode = ((CsvRow)e.Model).ItemCode;
                 ItemDetails iD = new ItemDetails(Application.StartupPath + $"\\Images\\{itemcode}.jpg", itemcode);
+                iD.WindowState = FormWindowState.Maximized;
                 iD.Show();
             }
         }
@@ -148,7 +151,10 @@ namespace DiamondInvoiceViewer
         }
         internal void clearToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
+            ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.Hide();
             ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.SetObjects(null);
+            ((Tags)((ToolStripMenuItem)sender).Tag).StatusLabel.Text = "Drag and drop your invoice csv file here";
+            ((Tags)((ToolStripMenuItem)sender).Tag).Form.Refresh();
             ((Tags)((ToolStripMenuItem)sender).Tag).StatusLabel.Visible = true;
         }
         internal void aboutToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -170,9 +176,15 @@ namespace DiamondInvoiceViewer
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.SetObjects(await ParseCsvAsync(ofd.FileName));
+                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.Hide();
+                ((Tags)((ToolStripMenuItem)sender).Tag).StatusLabel.Show();
+                ((Tags)((ToolStripMenuItem)sender).Tag).StatusLabel.Text = "Loading Invoice" + Environment.NewLine;
+                ((Tags)((ToolStripMenuItem)sender).Tag).Form.Refresh();
+                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.SetObjects(await ParseCsvAsync(ofd.FileName, ((Tags)((ToolStripMenuItem)sender).Tag).Form, ((Tags)((FastObjectListView)sender).Tag).Progressbar, ((Tags)((FastObjectListView)sender).Tag).StatusLabel));
                 ((Tags)((ToolStripMenuItem)sender).Tag).Form.Text = Title;
+                ((Tags)((ToolStripMenuItem)sender).Tag).Progressbar.Hide();
                 ((Tags)((ToolStripMenuItem)sender).Tag).StatusLabel.Hide();
+                ((Tags)((ToolStripMenuItem)sender).Tag).FastObjectListView.Show();
                 ((Tags)((ToolStripMenuItem)sender).Tag).Form.Refresh();
             }
         }
@@ -184,9 +196,15 @@ namespace DiamondInvoiceViewer
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(await ParseCsvAsync(ofd.FileName));
+                ((Tags)((Label)sender).Tag).FastObjectListView.Hide();
+                ((Tags)((Label)sender).Tag).StatusLabel.Show();
+                ((Tags)((Label)sender).Tag).StatusLabel.Text = "Loading Invoice" + Environment.NewLine;
+                ((Tags)((Label)sender).Tag).Form.Refresh();
+                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(await ParseCsvAsync(ofd.FileName, ((Tags)((Label)sender).Tag).Form, ((Tags)((FastObjectListView)sender).Tag).Progressbar, ((Tags)((FastObjectListView)sender).Tag).StatusLabel));
                 ((Tags)((Label)sender).Tag).Form.Text = Title;
+                ((Tags)((Label)sender).Tag).Progressbar.Hide();
                 ((Tags)((Label)sender).Tag).StatusLabel.Hide();
+                ((Tags)((Label)sender).Tag).FastObjectListView.Show();
                 ((Tags)((Label)sender).Tag).Form.Refresh();
             }
         }
@@ -228,8 +246,15 @@ namespace DiamondInvoiceViewer
             string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (!(fileList is null) && System.IO.File.Exists(fileList[0]))
             {
-                ((FastObjectListView)sender).SetObjects(await ParseCsvAsync(fileList[0]));
+                ((FastObjectListView)sender).Hide();
+                ((Tags)((FastObjectListView)sender).Tag).StatusLabel.Show();
+                ((Tags)((FastObjectListView)sender).Tag).StatusLabel.Text = "Loading Invoice" + Environment.NewLine;
+                ((Tags)((FastObjectListView)sender).Tag).Form.Refresh();
+                ((FastObjectListView)sender).SetObjects(await ParseCsvAsync(fileList[0], ((Tags)((FastObjectListView)sender).Tag).Form, ((Tags)((FastObjectListView)sender).Tag).Progressbar, ((Tags)((FastObjectListView)sender).Tag).StatusLabel));
                 ((Tags)((FastObjectListView)sender).Tag).Form.Text = Title;
+                ((Tags)((FastObjectListView)sender).Tag).Progressbar.Hide();
+                ((Tags)((FastObjectListView)sender).Tag).StatusLabel.Hide();
+                ((FastObjectListView)sender).Show();
                 ((Tags)((FastObjectListView)sender).Tag).Form.Refresh();
             }
         }
@@ -247,20 +272,34 @@ namespace DiamondInvoiceViewer
             string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             if (!(fileList is null) && System.IO.File.Exists(fileList[0]))
             {
-                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(await ParseCsvAsync(fileList[0]));
+                ((Tags)((Label)sender).Tag).FastObjectListView.Hide();
+                ((Tags)((Label)sender).Tag).StatusLabel.Text = "Loading Invoice" + Environment.NewLine;
+                ((Tags)((Label)sender).Tag).Form.Refresh();
+                ((Tags)((Label)sender).Tag).FastObjectListView.SetObjects(await ParseCsvAsync(fileList[0], ((Tags)((Label)sender).Tag).Form,((Tags)((Label)sender).Tag).Progressbar, ((Tags)((Label)sender).Tag).StatusLabel));
                 ((Tags)((Label)sender).Tag).Form.Text = Title;
                 ((Label)sender).Hide();
+                ((Tags)((Label)sender).Tag).Progressbar.Hide();
+                ((Tags)((Label)sender).Tag).FastObjectListView.Show();
                 ((Tags)((Label)sender).Tag).Form.Refresh();
             }
         }
         #endregion
 
         #region "Parse Csv"
-        internal async System.Threading.Tasks.Task<List<CsvRow>> ParseCsvAsync(string PathToFile)
+        internal async System.Threading.Tasks.Task<List<CsvRow>> ParseCsvAsync(string PathToFile, Form form, ProgressBar progressBar, Label label)
         {
             List<CsvRow> csvRows = new List<CsvRow>();
+            int numofitems;
             using (TextFieldParser parser = new TextFieldParser(PathToFile))
             {
+                numofitems = parser.ReadToEnd().Split('\n').Length;
+                progressBar.Minimum = 0;
+                progressBar.Maximum = numofitems - 1;
+                progressBar.Value = 0;
+                progressBar.Show();
+            }
+            using (TextFieldParser parser = new TextFieldParser(PathToFile))
+            { 
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
                 bool invoiceData = false;
@@ -269,7 +308,7 @@ namespace DiamondInvoiceViewer
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
-
+                    
                     if (fields[0] == "Invoice on Disk") invoiceData = true;
                     if (fields[0] == "Customer Email" && fields[10] == "Qty") pullboxData = true;
 
@@ -285,6 +324,11 @@ namespace DiamondInvoiceViewer
                         Title = "Diamond Invoice Parser";
                     }
                     if (invoiceData && fields.Length == 18) csvRows.Add(await ParseExtendedInvoiceAsync(fields));
+                    label.Text = "Loading Invoice" + Environment.NewLine + row + "/" + numofitems;
+                    if (DownloadImages) label.Text += Environment.NewLine + "(The first time downloading images" + Environment.NewLine + "can take some time)";
+                    progressBar.Value = row;
+                    form.Refresh();
+                    
                 }
             }
             return csvRows;
@@ -323,6 +367,7 @@ namespace DiamondInvoiceViewer
             }
             if (DownloadImages && (!File.Exists(Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg") || !File.Exists(Application.StartupPath + $"\\Thumbs\\{csvRow.ItemCode}.jpg")))
             {
+                await Task.Delay(10);
                 string img = await GetItemImageUrlAsync($"https://www.previewsworld.com/Catalog/{csvRow.ItemCode}");
                 SaveImage(img, Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg", csvRow.ItemCode);
             }
@@ -377,6 +422,7 @@ namespace DiamondInvoiceViewer
             
             if (DownloadImages && (!File.Exists(Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg") || !File.Exists(Application.StartupPath + $"\\Thumbs\\{csvRow.ItemCode}.jpg")))
             {
+                await Task.Delay(10);
                 string img = await GetItemImageUrlAsync($"https://www.previewsworld.com/Catalog/{csvRow.ItemCode}");
                 SaveImage(img, Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg", csvRow.ItemCode);
             }
@@ -451,6 +497,7 @@ namespace DiamondInvoiceViewer
             }
             if (DownloadImages && (!File.Exists(Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg") || !File.Exists(Application.StartupPath + $"\\Thumbs\\{csvRow.ItemCode}.jpg")))
             {
+                await Task.Delay(10);
                 string img = await GetItemImageUrlAsync($"https://www.previewsworld.com/Catalog/{csvRow.ItemCode}");
                 SaveImage(img, Application.StartupPath + $"\\Images\\{csvRow.ItemCode}.jpg", csvRow.ItemCode);
             }

@@ -62,10 +62,11 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbWindowicon = new System.Windows.Forms.PictureBox();
-            this.downloadImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -304,6 +305,7 @@
             // panelContent
             // 
             this.panelContent.Controls.Add(this.lblStatus);
+            this.panelContent.Controls.Add(this.progressBar1);
             this.panelContent.Controls.Add(this.fastObjectListView1);
             this.panelContent.Controls.Add(this.SearchPanel);
             this.panelContent.Controls.Add(this.panelControlBox);
@@ -320,7 +322,7 @@
             this.lblStatus.Font = new System.Drawing.Font("MV Boli", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.Location = new System.Drawing.Point(0, 55);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(1132, 395);
+            this.lblStatus.Size = new System.Drawing.Size(1132, 381);
             this.lblStatus.TabIndex = 1;
             this.lblStatus.Text = "Drag and drop your invoice csv file here";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -373,9 +375,9 @@
             // labelWindowTitle
             // 
             this.labelWindowTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelWindowTitle.Location = new System.Drawing.Point(268, 0);
+            this.labelWindowTitle.Location = new System.Drawing.Point(148, 0);
             this.labelWindowTitle.Name = "labelWindowTitle";
-            this.labelWindowTitle.Size = new System.Drawing.Size(744, 22);
+            this.labelWindowTitle.Size = new System.Drawing.Size(864, 22);
             this.labelWindowTitle.TabIndex = 0;
             this.labelWindowTitle.Text = "label1";
             this.labelWindowTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -420,7 +422,7 @@
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip1.Location = new System.Drawing.Point(22, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(246, 22);
+            this.menuStrip1.Size = new System.Drawing.Size(126, 22);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -480,7 +482,7 @@
             // 
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
             this.searchToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.searchToolStripMenuItem.Text = "Search";
             // 
             // showImagesToolStripMenuItem
@@ -489,8 +491,17 @@
             this.showImagesToolStripMenuItem.CheckOnClick = true;
             this.showImagesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showImagesToolStripMenuItem.Name = "showImagesToolStripMenuItem";
-            this.showImagesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showImagesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.showImagesToolStripMenuItem.Text = "Show Images";
+            // 
+            // downloadImagesToolStripMenuItem
+            // 
+            this.downloadImagesToolStripMenuItem.Checked = true;
+            this.downloadImagesToolStripMenuItem.CheckOnClick = true;
+            this.downloadImagesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.downloadImagesToolStripMenuItem.Name = "downloadImagesToolStripMenuItem";
+            this.downloadImagesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.downloadImagesToolStripMenuItem.Text = "Download Images";
             // 
             // helpToolStripMenuItem
             // 
@@ -517,14 +528,15 @@
             this.pbWindowicon.TabIndex = 5;
             this.pbWindowicon.TabStop = false;
             // 
-            // downloadImagesToolStripMenuItem
+            // progressBar1
             // 
-            this.downloadImagesToolStripMenuItem.Checked = true;
-            this.downloadImagesToolStripMenuItem.CheckOnClick = true;
-            this.downloadImagesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.downloadImagesToolStripMenuItem.Name = "downloadImagesToolStripMenuItem";
-            this.downloadImagesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.downloadImagesToolStripMenuItem.Text = "Download Images";
+            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar1.Location = new System.Drawing.Point(0, 436);
+            this.progressBar1.Maximum = 99999999;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(1132, 14);
+            this.progressBar1.TabIndex = 3;
+            this.progressBar1.Visible = false;
             // 
             // Form1
             // 
@@ -601,6 +613,7 @@
         private BrightIdeasSoftware.OLVColumn olvColImage;
         private System.Windows.Forms.ToolStripMenuItem showImagesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadImagesToolStripMenuItem;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

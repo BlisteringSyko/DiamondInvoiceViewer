@@ -10,14 +10,16 @@ namespace DiamondInvoiceViewer.Misc_Classes
         public Label StatusLabel { get; set; }
         public Panel SearchPanel { get; set; }
         public TextBox SearchTextBox { get; set; }
+        public ProgressBar Progressbar { get; set; }
 
-        public Tags(Form form, Label statusLabel, FastObjectListView fastObjectListView, Panel searchPanel, TextBox searchTextBox)
+        public Tags(Form form, Label statusLabel, FastObjectListView fastObjectListView, Panel searchPanel, TextBox searchTextBox, ProgressBar progressbar)
         {
             this.Form = form;
             this.StatusLabel = statusLabel;
             this.FastObjectListView = fastObjectListView;
             this.SearchPanel = searchPanel;
             this.SearchTextBox = searchTextBox;
+            this.Progressbar = progressbar;
         }
 
     }
